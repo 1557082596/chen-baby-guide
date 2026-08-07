@@ -324,6 +324,17 @@
     .name-pool h2 { margin: 0 0 3px; font-size: 18px; }
     .name-pool p { margin: 0; color: #70571d; font-size: 12px; }
     .name-pool-count { min-width: 105px; color: #815d0f; font-size: 12px; font-weight: 850; text-align: right; white-space: nowrap; }
+    .custom-name-form { display: grid; grid-template-columns: 180px 120px minmax(220px, 1fr) auto; gap: 9px; align-items: end; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(137, 102, 29, .22); }
+    .custom-name-field { min-width: 0; display: grid; gap: 5px; color: #70571d; font-size: 11px; font-weight: 800; }
+    .custom-name-field input, .custom-name-field select { width: 100%; min-height: 38px; padding: 8px 10px; border: 1px solid #d8ba75; border-radius: 4px; background: var(--paper); color: var(--ink); font: inherit; font-weight: 650; }
+    .custom-name-field input:focus-visible, .custom-name-field select:focus-visible { outline: 3px solid rgba(137, 102, 29, .18); outline-offset: 1px; border-color: #a87c20; }
+    .custom-name-add { min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 8px 12px; border: 1px solid #8d681b; border-radius: 4px; background: #8d681b; color: white; font-size: 12px; font-weight: 800; cursor: pointer; white-space: nowrap; }
+    .custom-name-add:hover { background: #745313; }
+    .custom-name-add:focus-visible { outline: 3px solid rgba(137, 102, 29, .24); outline-offset: 2px; }
+    .custom-name-add svg { width: 15px; height: 15px; }
+    .custom-name-message { min-height: 18px; margin-top: 7px; color: #765717; font-size: 11px; }
+    .custom-name-message.error { color: #9a3f35; }
+    .custom-name-message.success { color: var(--green); }
     .name-pool-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 13px; }
     .name-pool-group { min-width: 0; padding: 10px; border: 1px solid rgba(137, 102, 29, .22); background: rgba(255,255,255,.35); }
     .name-pool-group h3 { margin: 0 0 8px; color: #765717; font-size: 12px; }
@@ -415,6 +426,8 @@
       .generate-btn { grid-column: 1 / -1; }
       .generator-results-head { display: block; }
       .generator-results-head p { margin-top: 4px; text-align: left; }
+      .custom-name-form { grid-template-columns: 1fr 1fr; }
+      .custom-name-field.meaning-field, .custom-name-add { grid-column: 1 / -1; }
       .name-pool-list { grid-template-columns: 1fr; }
       .land-callout { grid-template-columns: 1fr; }
       .document-table td:first-child { width: 112px; }
@@ -425,7 +438,7 @@
     }
     @media print {
       body { background: white; font-size: 11pt; }
-      .sidebar, .topbar, .segmented, .heart-btn, .action-btn, .icon-btn, .admin-detail-btn, .detail-dialog, .generate-btn, .name-pool-remove { display: none !important; }
+      .sidebar, .topbar, .segmented, .heart-btn, .action-btn, .icon-btn, .admin-detail-btn, .detail-dialog, .generate-btn, .name-pool-remove, .custom-name-form, .custom-name-message { display: none !important; }
       .app-shell { display: block; }
       main { width: 100%; padding: 0; }
       .view { display: block !important; page-break-before: always; }
@@ -743,6 +756,19 @@
           </div>
           <section class="name-pool" aria-labelledby="namePoolTitle">
             <div class="name-pool-head"><div><h2 id="namePoolTitle">我的名字池</h2><p>点候选名字右上角的爱心加入；男孩、女孩和中性名字会分开保存。</p></div><span class="name-pool-count" id="namePoolCount" aria-live="polite">0 个</span></div>
+            <form class="custom-name-form" id="customNameForm" novalidate>
+              <label class="custom-name-field">自己取的名字
+                <input id="customNameInput" type="text" maxlength="4" placeholder="知行或陈知行" autocomplete="off">
+              </label>
+              <label class="custom-name-field">放入分类
+                <select id="customNameType"><option value="boy">男孩</option><option value="girl">女孩</option><option value="neutral">中性</option></select>
+              </label>
+              <label class="custom-name-field meaning-field">寓意（选填）
+                <input id="customNameMeaning" type="text" maxlength="50" placeholder="例如：知而善行，清醒坚定" autocomplete="off">
+              </label>
+              <button class="custom-name-add" type="submit"><i data-lucide="plus"></i>添加到名字池</button>
+            </form>
+            <div class="custom-name-message" id="customNameMessage" aria-live="polite"></div>
             <div class="name-pool-list" id="namePoolList"><span class="name-pool-empty">还没有选中的名字。</span></div>
           </section>
           <section class="name-generator" aria-labelledby="nameGeneratorTitle">
@@ -1236,8 +1262,59 @@
       }
       localStorage.setItem('babyGuideNames', JSON.stringify(favorites));
       localStorage.setItem('babyGuideGeneratedNames', JSON.stringify(generatedLibrary));
+      setCustomNameMessage('');
       createNames(filter);
       renderGeneratedNames();
+    }
+
+    function setCustomNameMessage(message, type = '') {
+      const element = document.getElementById('customNameMessage');
+      element.textContent = message;
+      element.className = `custom-name-message ${type}`.trim();
+    }
+
+    function addCustomName(event) {
+      event.preventDefault();
+      const input = document.getElementById('customNameInput');
+      const meaningInput = document.getElementById('customNameMeaning');
+      const type = document.getElementById('customNameType').value;
+      let givenName = input.value.trim().replace(/\s+/g, '');
+      if (givenName.startsWith('陈')) givenName = givenName.slice(1);
+      if (!/^[\u4e00-\u9fff]{1,3}$/.test(givenName)) {
+        setCustomNameMessage('请输入1—3个中文名字，可输入“知行”或“陈知行”。', 'error');
+        input.focus();
+        return;
+      }
+
+      const fullName = `陈${givenName}`;
+      const favorites = getNameFavorites();
+      if (favorites.includes(fullName)) {
+        setCustomNameMessage(`${fullName}已经在名字池中，不需要重复添加。`, 'error');
+        input.focus();
+        return;
+      }
+
+      const generatedLibrary = getSavedGeneratedNames();
+      const knownRecord = uniqueNameRecords([...names, ...generatedNameCatalog, ...Object.values(generatedLibrary)]).find(record => record.name === fullName);
+      const record = knownRecord || {
+        name:fullName,
+        pinyin:'家长自取',
+        strokes:'待核对',
+        type:[type],
+        meaning:meaningInput.value.trim() || '家长自行构思的名字，具体寓意可继续补充。',
+        tags:['自定义','待查谐音与重名'],
+        custom:true
+      };
+
+      favorites.push(fullName);
+      if (!names.some(item => item.name === fullName)) generatedLibrary[fullName] = record;
+      localStorage.setItem('babyGuideNames', JSON.stringify(favorites));
+      localStorage.setItem('babyGuideGeneratedNames', JSON.stringify(generatedLibrary));
+      input.value = '';
+      meaningInput.value = '';
+      createNames(currentNameFilter);
+      renderGeneratedNames();
+      setCustomNameMessage(`${fullName}已添加到${type === 'boy' ? '男孩' : type === 'girl' ? '女孩' : '中性'}名字池。`, 'success');
     }
 
     function renderNamePool() {
@@ -1377,6 +1454,7 @@
     });
     document.getElementById('printBtn').addEventListener('click', () => window.print());
     document.getElementById('generateNames').addEventListener('click', generateRandomNames);
+    document.getElementById('customNameForm').addEventListener('submit', addCustomName);
     document.getElementById('resetChecklist').addEventListener('click', () => { localStorage.removeItem('babyGuideChecks'); createChecklist(); });
     document.getElementById('resetAdmin').addEventListener('click', () => {
       localStorage.removeItem('babyGuideAdmin');
