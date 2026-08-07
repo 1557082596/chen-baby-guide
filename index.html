@@ -319,6 +319,45 @@
     .name-notes { margin-top: 24px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
     .name-note { padding: 16px; background: var(--blue-soft); border-top: 3px solid var(--blue); font-size: 13px; }
     .name-note strong { display: block; margin-bottom: 3px; }
+    .name-pool { margin-bottom: 18px; padding: 18px 20px; border-left: 4px solid var(--amber); background: var(--amber-soft); }
+    .name-pool-head { display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+    .name-pool h2 { margin: 0 0 3px; font-size: 18px; }
+    .name-pool p { margin: 0; color: #70571d; font-size: 12px; }
+    .name-pool-count { min-width: 105px; color: #815d0f; font-size: 12px; font-weight: 850; text-align: right; white-space: nowrap; }
+    .name-pool-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 13px; }
+    .name-pool-group { min-width: 0; padding: 10px; border: 1px solid rgba(137, 102, 29, .22); background: rgba(255,255,255,.35); }
+    .name-pool-group h3 { margin: 0 0 8px; color: #765717; font-size: 12px; }
+    .name-pool-group-items { display: flex; flex-wrap: wrap; gap: 7px; }
+    .name-pool-item { min-height: 34px; display: inline-flex; align-items: center; gap: 8px; padding: 5px 6px 5px 10px; border: 1px solid #d8ba75; border-radius: 4px; background: var(--paper); }
+    .name-pool-item strong { font: 700 15px/1.2 Georgia, "Noto Serif SC", serif; }
+    .name-pool-item small { color: var(--muted); font-size: 10px; }
+    .name-pool-remove { width: 26px; height: 26px; display: grid; place-items: center; border: 0; border-radius: 3px; background: transparent; color: #89661d; cursor: pointer; }
+    .name-pool-remove:hover { background: #f1dfb7; }
+    .name-pool-remove:focus-visible { outline: 3px solid rgba(137, 102, 29, .2); }
+    .name-pool-remove svg { width: 14px; height: 14px; }
+    .name-pool-empty { color: #806a38; font-size: 12px; }
+    .name-generator { margin-bottom: 28px; padding: 22px; border: 1px solid var(--line); border-top: 4px solid var(--green); border-radius: var(--radius); background: var(--surface); }
+    .generator-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: start; }
+    .generator-head h2 { margin: 0 0 6px; font-size: 21px; }
+    .generator-head p { margin: 0; color: var(--muted); font-size: 13px; }
+    .generator-controls { display: grid; grid-template-columns: 132px 190px auto; gap: 10px; align-items: end; }
+    .generator-field { display: grid; gap: 6px; color: #435047; font-size: 12px; font-weight: 750; }
+    .generator-field select { width: 100%; min-height: 40px; padding: 8px 34px 8px 10px; border: 1px solid var(--line); border-radius: 4px; background: var(--paper); color: var(--ink); font: inherit; font-weight: 650; }
+    .generator-field select:focus-visible { outline: 3px solid rgba(53, 102, 80, .18); outline-offset: 1px; border-color: var(--green); }
+    .generate-btn { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--green); border-radius: 4px; background: var(--green); color: white; font-size: 13px; font-weight: 800; cursor: pointer; white-space: nowrap; }
+    .generate-btn:hover { background: #294f40; }
+    .generate-btn:focus-visible { outline: 3px solid rgba(53, 102, 80, .22); outline-offset: 2px; }
+    .generate-btn svg { width: 16px; height: 16px; }
+    .generator-hint { margin-top: 16px; padding: 11px 13px; background: var(--green-soft); color: #315646; font-size: 12px; line-height: 1.65; }
+    .generator-results-head { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin: 24px 0 12px; }
+    .generator-results-head h3 { margin: 0; font-size: 16px; }
+    .generator-results-head p { margin: 0; color: var(--muted); font-size: 12px; text-align: right; }
+    .generated-name-grid { padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+    .generated-placeholder { grid-column: 1 / -1; min-height: 120px; display: grid; place-items: center; padding: 24px; border: 1px dashed var(--line); color: var(--muted); text-align: center; }
+    .element-tag { color: var(--green); background: var(--green-soft); font-weight: 800; }
+    .shortlist-head { margin: 28px 0 12px; }
+    .shortlist-head h2 { margin: 0 0 4px; font-size: 18px; }
+    .shortlist-head p { margin: 0; color: var(--muted); font-size: 12px; }
 
     .footer-note { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
     .mobile-title { display: none; }
@@ -370,6 +409,13 @@
       .detail-head { padding: 17px 16px 14px; }
       .detail-head h2 { font-size: 18px; }
       .detail-scroll { max-height: calc(90vh - 84px); padding: 0 16px 20px; }
+      .name-generator { padding: 18px 16px; }
+      .generator-head { grid-template-columns: 1fr; gap: 18px; }
+      .generator-controls { grid-template-columns: 1fr 1fr; }
+      .generate-btn { grid-column: 1 / -1; }
+      .generator-results-head { display: block; }
+      .generator-results-head p { margin-top: 4px; text-align: left; }
+      .name-pool-list { grid-template-columns: 1fr; }
       .land-callout { grid-template-columns: 1fr; }
       .document-table td:first-child { width: 112px; }
       .subsidy-table td:first-child, .subsidy-table td:nth-child(2) { width: auto; }
@@ -379,7 +425,7 @@
     }
     @media print {
       body { background: white; font-size: 11pt; }
-      .sidebar, .topbar, .segmented, .heart-btn, .action-btn, .icon-btn, .admin-detail-btn, .detail-dialog { display: none !important; }
+      .sidebar, .topbar, .segmented, .heart-btn, .action-btn, .icon-btn, .admin-detail-btn, .detail-dialog, .generate-btn, .name-pool-remove { display: none !important; }
       .app-shell { display: block; }
       main { width: 100%; padding: 0; }
       .view { display: block !important; page-break-before: always; }
@@ -695,6 +741,28 @@
             <div><p class="eyebrow">Name shortlist</p><h1>陈姓名字备选</h1><p class="lede">低笔画、无生僻字、普通话读音清楚，兼顾童年称呼与成年正式场合。</p></div>
             <div class="segmented" data-filter-group="names"><button class="active" data-filter="all">全部</button><button data-filter="boy">男孩</button><button data-filter="girl">女孩</button><button data-filter="neutral">中性</button><button data-filter="favorite">已收藏</button></div>
           </div>
+          <section class="name-pool" aria-labelledby="namePoolTitle">
+            <div class="name-pool-head"><div><h2 id="namePoolTitle">我的名字池</h2><p>点候选名字右上角的爱心加入；男孩、女孩和中性名字会分开保存。</p></div><span class="name-pool-count" id="namePoolCount" aria-live="polite">0 个</span></div>
+            <div class="name-pool-list" id="namePoolList"><span class="name-pool-empty">还没有选中的名字。</span></div>
+          </section>
+          <section class="name-generator" aria-labelledby="nameGeneratorTitle">
+            <div class="generator-head">
+              <div><h2 id="nameGeneratorTitle">五行意象取名</h2><p>根据预产月份、性别和字义意象，从人工筛选的常用字组合中随机推荐。</p></div>
+              <div class="generator-controls">
+                <label class="generator-field">性别
+                  <select id="nameGender"><option value="all">不限</option><option value="boy">男孩</option><option value="girl">女孩</option></select>
+                </label>
+                <label class="generator-field">五行意象
+                  <select id="nameElement"><option value="auto">按预产月份</option><option value="balanced">五行均衡</option><option value="wood">木 · 生长仁厚</option><option value="fire">火 · 明朗热忱</option><option value="earth">土 · 稳重包容</option><option value="metal">金 · 坚定清正</option><option value="water">水 · 灵动包容</option></select>
+                </label>
+                <button class="generate-btn" id="generateNames" type="button"><i data-lucide="refresh-cw"></i>随机生成10个</button>
+              </div>
+            </div>
+            <div class="generator-hint" id="nameSeasonHint"></div>
+            <div class="generator-results-head"><h3>本轮推荐</h3><p id="generatedNameSummary" aria-live="polite">点击按钮生成10个名字</p></div>
+            <div class="name-grid generated-name-grid" id="generatedNameGrid"><div class="generated-placeholder">名字会显示读音、寓意、五行意象和简体字参考笔画。</div></div>
+          </section>
+          <div class="shortlist-head"><h2>人工精选备选</h2><p>这里保留前期筛选的稳定候选；生成器收藏的名字会进入“已收藏”。</p></div>
           <div class="name-grid" id="nameGrid"></div>
           <div class="name-notes">
             <div class="name-note"><strong>普通话连读</strong>连续快速读十遍，排除容易产生的谐音。</div>
@@ -784,6 +852,91 @@
       { name:'陈宜宁', pinyin:'Chén Yíníng', strokes:'13画', type:['girl'], meaning:'举止合宜，内心安宁，温和而有分寸。', tags:['端正','不俗气','正式自然'] },
       { name:'陈亦宁', pinyin:'Chén Yìníng', strokes:'11画', type:['girl','neutral'], meaning:'在变化中依然保持安定、清醒与坚定。', tags:['低笔画','节奏清楚','中性可用'] }
     ];
+
+    const generatedName = (given, pinyin, strokes, type, element, meaning, tags) => ({ name:`陈${given}`, pinyin:`Chén ${pinyin}`, strokes:`约${strokes}画`, type, element, meaning, tags });
+    const generatedNameCatalog = [
+      generatedName('嘉木','Jiāmù',18,['boy'],'wood','嘉美端正，如木向阳生长，寓意有根基也有生命力。',['开阔','不生僻']),
+      generatedName('柏言','Bǎiyán',16,['boy'],'wood','如柏坚定长青，言而有信，兼具韧性与表达力。',['稳重','书写清楚']),
+      generatedName('景禾','Jǐnghé',17,['boy'],'wood','心中有光，像禾苗一样踏实生长、懂得积累。',['明朗','江南意象']),
+      generatedName('言松','Yánsōng',15,['boy'],'wood','言语坦荡，品格如松，坚定而不失从容。',['声调清楚','成人感']),
+      generatedName('启林','Qǐlín',15,['boy'],'wood','开启见识，成林成材，寓意持续学习并能担当。',['成长感','简洁']),
+      generatedName('若禾','Ruòhé',13,['girl'],'wood','柔韧清醒，如禾自然生长，温和而有自己的节奏。',['低笔画','自然']),
+      generatedName('芊宁','Qiānníng',11,['girl'],'wood','草木茂盛而内心安宁，寓意蓬勃、平和。',['低笔画','温柔']),
+      generatedName('语桐','Yǔtóng',19,['girl'],'wood','善于表达，如梧桐挺拔舒展，清朗而有分寸。',['书卷气','端正']),
+      generatedName('芷安','Zhǐ’ān',13,['girl'],'wood','取香草清正之意，安定坦然，气质干净。',['古典意象','好写']),
+      generatedName('栩宁','Xǔníng',15,['girl'],'wood','生动有灵气，同时保持安宁笃定的内心。',['有灵气','成年适用']),
+      generatedName('知林','Zhīlín',16,['neutral'],'wood','有见识也有成长的空间，像树林一样包容丰盛。',['中性可用','思辨']),
+      generatedName('予禾','Yǔhé',9,['neutral'],'wood','给予善意，踏实生长，名字简洁而有温度。',['低笔画','中性可用']),
+
+      generatedName('昱安','Yù’ān',15,['boy'],'fire','昱为日光照耀，安为从容稳定，明亮而不急躁。',['明朗','稳重']),
+      generatedName('明川','Míngchuān',11,['boy'],'fire','明辨通透，胸怀如川，寓意清醒而开阔。',['低笔画','读音响亮']),
+      generatedName('景明','Jǐngmíng',20,['boy'],'fire','取光明清朗之意，待人坦荡，眼界明净。',['古典感','正式自然']),
+      generatedName('晏清','Yànqīng',21,['boy'],'fire','天色清明、生活安定，寓意沉着清醒。',['少重名','温润']),
+      generatedName('旭宁','Xùníng',11,['boy'],'fire','如旭日初升，明朗有朝气，同时安宁稳健。',['低笔画','朝气']),
+      generatedName('晴安','Qíng’ān',18,['girl'],'fire','心境晴朗，平安舒展，遇事保有积极和从容。',['温暖','耐听']),
+      generatedName('映禾','Yìnghé',14,['girl'],'fire','光映禾田，寓意明亮、踏实，也带江南生活气息。',['画面感','自然']),
+      generatedName('晓安','Xiǎo’ān',16,['girl'],'fire','知晓明辨，安定坦然，寓意清醒且有安全感。',['清楚好读','温和']),
+      generatedName('昕宁','Xīnníng',13,['girl'],'fire','昕为黎明，宁为安定，寓意带着希望从容成长。',['明亮','简洁']),
+      generatedName('暖言','Nuǎnyán',20,['girl'],'fire','言语温暖真诚，懂得照顾别人，也保有原则。',['温暖','辨识度']),
+      generatedName('亦明','Yìmíng',14,['neutral'],'fire','在变化中仍保持明辨、坦荡和清醒。',['中性可用','节奏清楚']),
+      generatedName('乐昭','Lèzhāo',14,['neutral'],'fire','乐观开朗，昭明坦荡，寓意真诚而有生命力。',['中性可用','明快']),
+
+      generatedName('亦城','Yìchéng',15,['boy'],'earth','内心坚定，如城可靠，同时懂得包容和守护。',['稳重','成人感']),
+      generatedName('知岳','Zhīyuè',16,['boy'],'earth','有见识、有原则，如山岳沉稳而目光高远。',['挺拔','辨识度']),
+      generatedName('维安','Wéi’ān',17,['boy'],'earth','能维持秩序与内心安定，做事周全而可靠。',['稳健','正式自然']),
+      generatedName('宇衡','Yǔhéng',22,['boy'],'earth','胸怀开阔，懂得权衡与分寸，沉着而理性。',['大方','思辨']),
+      generatedName('屿川','Yǔchuān',9,['boy'],'earth','如岛屿有定力、如河川能通达，刚柔并济。',['低笔画','画面开阔']),
+      generatedName('坤言','Kūnyán',15,['boy'],'earth','坤为厚德承载，言为诚信表达，稳重而可信。',['传统意象','好写']),
+      generatedName('安岚','Ānlán',13,['girl'],'earth','安定从容，岚为山间清气，温柔而不柔弱。',['自然','耐看']),
+      generatedName('宛宁','Wǎnníng',13,['girl'],'earth','举止温和有分寸，内心宁静坚定。',['端正','成年适用']),
+      generatedName('宇宁','Yǔníng',11,['girl'],'earth','心有空间，安宁从容，待人宽厚而清醒。',['低笔画','大方']),
+      generatedName('依安','Yī’ān',14,['girl'],'earth','有所依靠也能独立，愿一生平安笃定。',['温暖','读音柔和']),
+      generatedName('岑宁','Cénníng',12,['girl'],'earth','岑为小而高的山，寓意安静坚定、有自己的高度。',['低笔画','少重名']),
+      generatedName('安予','Ānyǔ',10,['neutral'],'earth','平安从容，愿意给予善意，也懂得照顾自己。',['低笔画','中性可用']),
+      generatedName('亦山','Yìshān',9,['neutral'],'earth','在变化中仍有山一样的定力，简单、沉稳。',['低笔画','中性可用']),
+
+      generatedName('钧安','Jūn’ān',15,['boy'],'metal','钧有公正、分量之意，安为稳定，寓意持正可靠。',['端正','稳重']),
+      generatedName('铭川','Míngchuān',14,['boy'],'metal','铭记原则，胸怀如川，既坚定又懂得变通。',['响亮','好写']),
+      generatedName('锐宁','Ruìníng',17,['boy'],'metal','思路敏锐而内心安宁，果断但不急躁。',['清醒','成人感']),
+      generatedName('铎言','Duóyán',17,['boy'],'metal','铎为传播声教之器，寓意表达有力量、有责任感。',['文化意象','辨识度']),
+      generatedName('锦川','Jǐnchuān',16,['boy'],'metal','前程丰美，胸怀通达，如川流稳健向前。',['开阔','正式自然']),
+      generatedName('钰宁','Yùníng',15,['girl'],'metal','钰为珍宝，宁为安定，珍贵而不张扬。',['端正','温和']),
+      generatedName('锦安','Jǐn’ān',19,['girl'],'metal','生活丰盛而内心平安，明丽但有分寸。',['大方','耐听']),
+      generatedName('铃禾','Línghé',15,['girl'],'metal','声音清越，如禾自然生长，灵动又踏实。',['清亮','自然']),
+      generatedName('锦书','Jǐnshū',17,['girl'],'metal','有美好前程，也有阅读、思考和表达的能力。',['书卷气','成年适用']),
+      generatedName('舒钰','Shūyù',22,['girl'],'metal','从容舒展，内在珍贵坚定，温柔而有力量。',['温润','正式自然']),
+      generatedName('钦予','Qīnyǔ',13,['neutral'],'metal','懂得尊重与敬重，也愿意给予和分享。',['中性可用','少重名']),
+      generatedName('亦钧','Yìjūn',15,['neutral'],'metal','保持公允与分寸，在不同环境中依然坚定。',['中性可用','稳健']),
+
+      generatedName('沐川','Mùchuān',11,['boy'],'water','如沐清风，胸怀如川，清爽、坦荡并能持续前行。',['低笔画','开阔']),
+      generatedName('泽安','Zé’ān',14,['boy'],'water','有润泽他人的善意，也有安定可靠的内心。',['温厚','好读']),
+      generatedName('清远','Qīngyuǎn',18,['boy'],'water','内心清明，目光长远，做事不随波逐流。',['清醒','成人感']),
+      generatedName('江禾','Jiānghé',11,['boy'],'water','既有江水的通达，也有禾苗的踏实与生命力。',['低笔画','江南意象']),
+      generatedName('涵舟','Hánzhōu',17,['boy'],'water','有涵养、有方向，如舟稳健穿行于人生。',['温润','画面开阔']),
+      generatedName('沐宁','Mùníng',13,['girl'],'water','清润自然，内心安宁，温柔而保持清醒。',['清新','简洁']),
+      generatedName('清禾','Qīnghé',16,['girl'],'water','清澈坦荡，如禾踏实生长，干净而有韧性。',['自然','江南意象']),
+      generatedName('汐宁','Xīníng',11,['girl'],'water','如潮汐有节律，心境安宁，懂得自己的节奏。',['低笔画','灵动']),
+      generatedName('溪安','Xī’ān',19,['girl'],'water','像溪水清澈流动，平安自在，柔韧而有方向。',['画面感','温柔']),
+      generatedName('雨禾','Yǔhé',13,['girl'],'water','雨润禾苗，寓意得到滋养，也能踏实成长。',['嘉兴意象','好写']),
+      generatedName('云舟','Yúnzhōu',10,['neutral'],'water','心境开阔自由，也像舟一样知道方向。',['低笔画','中性可用']),
+      generatedName('沐言','Mùyán',15,['neutral'],'water','言语清润真诚，待人温和，同时有自己的观点。',['中性可用','清朗'])
+    ];
+    const elementMeta = {
+      wood:{ label:'木', theme:'生长、仁厚', support:['water','fire'] },
+      fire:{ label:'火', theme:'明朗、热忱', support:['wood','earth'] },
+      earth:{ label:'土', theme:'稳重、包容', support:['fire','metal'] },
+      metal:{ label:'金', theme:'坚定、清正', support:['earth','water'] },
+      water:{ label:'水', theme:'灵动、包容', support:['metal','wood'] }
+    };
+    const seasonalElements = {
+      winter:{ months:[12,1,2], label:'冬季', elements:['fire','wood'] },
+      spring:{ months:[3,4,5], label:'春季', elements:['metal','earth'] },
+      summer:{ months:[6,7,8], label:'夏季', elements:['water','metal'] },
+      autumn:{ months:[9,10,11], label:'秋季', elements:['wood','fire'] }
+    };
+    let currentGeneratedNames = [];
+    let currentNameFilter = 'all';
+    let lastGeneratedSignature = '';
 
     const titles = { overview:'家庭总览', admin:'办事时间线', timeline:'月龄路线', feeding:'喂养策略', sleep:'睡眠策略', care:'清洁护理', safety:'安全健康', checklist:'用品清单', names:'名字备选' };
     const icon = (name) => `<i data-lucide="${name}"></i>`;
@@ -1021,19 +1174,152 @@
       });
     }
 
+    function getNameFavorites() {
+      return JSON.parse(localStorage.getItem('babyGuideNames') || '[]');
+    }
+
+    function getSavedGeneratedNames() {
+      return JSON.parse(localStorage.getItem('babyGuideGeneratedNames') || '{}');
+    }
+
+    function uniqueNameRecords(records) {
+      return [...new Map(records.map(record => [record.name, record])).values()];
+    }
+
+    function nameCardMarkup(record, favorites) {
+      const selected = favorites.includes(record.name);
+      const action = selected ? '移出名字池' : '加入名字池';
+      return `<article class="name-card ${selected ? 'favorite' : ''}"><button class="heart-btn" data-name="${record.name}" title="${action}：${record.name}" aria-label="${action}：${record.name}">${icon('heart')}</button><h3>${record.name}</h3><span class="pinyin">${record.pinyin}</span><p>${record.meaning}</p><div class="name-meta">${record.element ? `<span class="tag element-tag">${elementMeta[record.element].label} · ${elementMeta[record.element].theme}</span>` : ''}<span class="tag">名字 ${record.strokes}</span>${record.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div></article>`;
+    }
+
+    function bindFavoriteButtons(container, records, filter = currentNameFilter) {
+      container.querySelectorAll('.heart-btn').forEach(button => {
+        const record = records.find(item => item.name === button.dataset.name);
+        if (record) button.addEventListener('click', () => toggleFavorite(record, filter));
+      });
+    }
+
     function createNames(filter = 'all') {
-      const favorites = JSON.parse(localStorage.getItem('babyGuideNames') || '[]');
-      const shown = names.filter(n => filter === 'all' || (filter === 'favorite' ? favorites.includes(n.name) : n.type.includes(filter)));
-      document.getElementById('nameGrid').innerHTML = shown.length ? shown.map(n => `<article class="name-card ${favorites.includes(n.name) ? 'favorite' : ''}"><button class="heart-btn" data-name="${n.name}" title="收藏 ${n.name}" aria-label="收藏 ${n.name}">${icon('heart')}</button><h3>${n.name}</h3><span class="pinyin">${n.pinyin}</span><p>${n.meaning}</p><div class="name-meta"><span class="tag">名字 ${n.strokes}</span>${n.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`).join('') : '<p class="lede">还没有收藏名字。</p>';
-      document.querySelectorAll('.heart-btn').forEach(btn => btn.addEventListener('click', () => toggleFavorite(btn.dataset.name, filter)));
+      currentNameFilter = filter;
+      const favorites = getNameFavorites();
+      const savedGenerated = Object.values(getSavedGeneratedNames());
+      const available = filter === 'favorite' ? uniqueNameRecords([...names, ...savedGenerated]) : names;
+      const shown = available.filter(record => filter === 'all' || (filter === 'favorite' ? favorites.includes(record.name) : record.type.includes(filter)));
+      const grid = document.getElementById('nameGrid');
+      grid.innerHTML = shown.length ? shown.map(record => nameCardMarkup(record, favorites)).join('') : '<p class="lede">还没有收藏名字。可以在生成结果或精选备选中点击爱心加入。</p>';
+      bindFavoriteButtons(grid, shown, filter);
+      renderNamePool();
       if (window.lucide) lucide.createIcons();
     }
 
-    function toggleFavorite(name, filter) {
-      let favorites = JSON.parse(localStorage.getItem('babyGuideNames') || '[]');
-      favorites = favorites.includes(name) ? favorites.filter(x => x !== name) : [...favorites, name];
+    function renderGeneratedNames() {
+      const grid = document.getElementById('generatedNameGrid');
+      if (!currentGeneratedNames.length) {
+        grid.innerHTML = '<div class="generated-placeholder">名字会显示读音、寓意、五行意象和简体字参考笔画。</div>';
+        return;
+      }
+      const favorites = getNameFavorites();
+      grid.innerHTML = currentGeneratedNames.map(record => nameCardMarkup(record, favorites)).join('');
+      bindFavoriteButtons(grid, currentGeneratedNames);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function toggleFavorite(record, filter = currentNameFilter) {
+      let favorites = getNameFavorites();
+      const generatedLibrary = getSavedGeneratedNames();
+      if (favorites.includes(record.name)) {
+        favorites = favorites.filter(name => name !== record.name);
+        delete generatedLibrary[record.name];
+      } else {
+        favorites.push(record.name);
+        if (!names.some(item => item.name === record.name)) generatedLibrary[record.name] = record;
+      }
       localStorage.setItem('babyGuideNames', JSON.stringify(favorites));
+      localStorage.setItem('babyGuideGeneratedNames', JSON.stringify(generatedLibrary));
       createNames(filter);
+      renderGeneratedNames();
+    }
+
+    function renderNamePool() {
+      const favorites = getNameFavorites();
+      const records = uniqueNameRecords([...names, ...Object.values(getSavedGeneratedNames())]).filter(record => favorites.includes(record.name));
+      const groups = { boy:[], girl:[], neutral:[] };
+      records.forEach(record => {
+        const group = record.type.includes('neutral') || (record.type.includes('boy') && record.type.includes('girl')) ? 'neutral' : record.type.includes('boy') ? 'boy' : 'girl';
+        groups[group].push(record);
+      });
+      document.getElementById('namePoolCount').textContent = `男${groups.boy.length} · 女${groups.girl.length} · 中性${groups.neutral.length}`;
+      const pool = document.getElementById('namePoolList');
+      const renderGroup = (key, label) => `<section class="name-pool-group"><h3>${label} · ${groups[key].length}</h3><div class="name-pool-group-items">${groups[key].length ? groups[key].map(record => `<span class="name-pool-item"><strong>${record.name}</strong><small>${record.pinyin.replace('Chén ', '')}</small><button class="name-pool-remove" data-name="${record.name}" title="移出名字池" aria-label="将${record.name}移出名字池">${icon('x')}</button></span>`).join('') : '<span class="name-pool-empty">暂无</span>'}</div></section>`;
+      pool.innerHTML = [renderGroup('boy','男孩'), renderGroup('girl','女孩'), renderGroup('neutral','中性')].join('');
+      pool.querySelectorAll('.name-pool-remove').forEach(button => {
+        const record = records.find(item => item.name === button.dataset.name);
+        if (record) button.addEventListener('click', () => toggleFavorite(record));
+      });
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function getSeasonalNameProfile(date) {
+      const month = date.getMonth() + 1;
+      return Object.values(seasonalElements).find(profile => profile.months.includes(month));
+    }
+
+    function updateNameGeneratorHint(birth) {
+      const month = birth.getMonth() + 1;
+      const profile = getSeasonalNameProfile(birth);
+      const labels = profile.elements.map(element => elementMeta[element].label).join('、');
+      document.getElementById('nameSeasonHint').innerHTML = `<strong>当前联动：</strong>预产期为${month}月，按公历月份粗略归为${profile.label}，自动模式会优先${labels}意象。五行分类仅按字义、部首和季节意象作传统文化参考，不等于八字喜用神；实际出生日期和时辰确定后应重新核对。`;
+    }
+
+    function shuffleNames(records) {
+      const result = [...records];
+      for (let index = result.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
+      }
+      return result;
+    }
+
+    function generateRandomNames() {
+      const gender = document.getElementById('nameGender').value;
+      const focus = document.getElementById('nameElement').value;
+      const birth = new Date(document.getElementById('dueDate').value + 'T00:00:00');
+      const profile = getSeasonalNameProfile(birth);
+      const genderMatches = record => gender === 'all' || record.type.includes(gender) || record.type.includes('neutral');
+      const eligible = generatedNameCatalog.filter(genderMatches);
+      let selected = [];
+      let description = '';
+
+      for (let attempt = 0; attempt < 8; attempt += 1) {
+        if (focus === 'balanced') {
+          selected = shuffleNames(eligible).slice(0, 10);
+          description = '五行意象均衡混合';
+        } else if (focus === 'auto') {
+          const preferred = eligible.filter(record => profile.elements.includes(record.element));
+          const remaining = eligible.filter(record => !profile.elements.includes(record.element));
+          selected = [...shuffleNames(preferred), ...shuffleNames(remaining)].slice(0, 10);
+          description = `${birth.getMonth() + 1}月${profile.label}参考，偏向${profile.elements.map(element => elementMeta[element].label).join('、')}`;
+        } else {
+          const primary = eligible.filter(record => record.element === focus);
+          const supportElements = elementMeta[focus].support;
+          const support = eligible.filter(record => supportElements.includes(record.element));
+          const other = eligible.filter(record => record.element !== focus && !supportElements.includes(record.element));
+          const primaryCount = Math.min(primary.length, gender === 'all' ? 7 : 6);
+          selected = [...shuffleNames(primary).slice(0, primaryCount), ...shuffleNames(support), ...shuffleNames(other)].slice(0, 10);
+          description = `以${elementMeta[focus].label}为主，搭配${supportElements.map(element => elementMeta[element].label).join('、')}意象`;
+        }
+        selected = shuffleNames(uniqueNameRecords(selected));
+        const signature = selected.map(record => record.name).sort().join('|');
+        if (signature !== lastGeneratedSignature || attempt === 7) {
+          lastGeneratedSignature = signature;
+          break;
+        }
+      }
+
+      currentGeneratedNames = selected;
+      const genderLabel = gender === 'boy' ? '男孩' : gender === 'girl' ? '女孩' : '男女不限';
+      document.getElementById('generatedNameSummary').textContent = `${genderLabel} · ${description} · 共${selected.length}个`;
+      renderGeneratedNames();
     }
 
     function updateDate() {
@@ -1057,6 +1343,8 @@
       updateOverview(birth);
       updateAdminDates(birth);
       updateLongTermYears(birth);
+      updateNameGeneratorHint(birth);
+      if (currentGeneratedNames.length && document.getElementById('nameElement').value === 'auto') generateRandomNames();
       const activeMonthFilter = document.querySelector('[data-filter-group="months"] button.active')?.dataset.filter || 'all';
       applyMonthFilter(activeMonthFilter);
       document.querySelectorAll('[data-climate-age]').forEach(x => x.classList.toggle('month-now', Number(x.dataset.climateAge) === age));
@@ -1088,6 +1376,7 @@
       window.scrollTo({top:0, behavior:'smooth'});
     });
     document.getElementById('printBtn').addEventListener('click', () => window.print());
+    document.getElementById('generateNames').addEventListener('click', generateRandomNames);
     document.getElementById('resetChecklist').addEventListener('click', () => { localStorage.removeItem('babyGuideChecks'); createChecklist(); });
     document.getElementById('resetAdmin').addEventListener('click', () => {
       localStorage.removeItem('babyGuideAdmin');
@@ -1103,6 +1392,7 @@
     if (savedDate) document.getElementById('dueDate').value = savedDate;
     document.getElementById('dueDate').addEventListener('change', updateDate);
     updateDate();
+    generateRandomNames();
     if (window.lucide) lucide.createIcons();
   </script>
 </body>
