@@ -200,6 +200,55 @@
     .month-content ul { margin: 0; padding-left: 18px; color: #435047; font-size: 13px; }
     .month-content li + li { margin-top: 5px; }
 
+    .process-flow {
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px;
+      border: 1px solid var(--line); background: var(--line); overflow: hidden;
+    }
+    .process-step { min-height: 112px; padding: 18px; background: var(--surface); position: relative; }
+    .process-step span { display: block; color: var(--green); font-size: 11px; font-weight: 850; }
+    .process-step strong { display: block; margin: 5px 0 4px; font-size: 15px; }
+    .process-step small { display: block; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .process-step:not(:last-child)::after {
+      content: ""; position: absolute; z-index: 1; right: -7px; top: 48px;
+      width: 12px; height: 12px; border-top: 2px solid var(--green); border-right: 2px solid var(--green); transform: rotate(45deg);
+    }
+    .land-callout {
+      margin: 22px 0 28px; padding: 20px; display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 14px;
+      background: var(--amber-soft); border-left: 4px solid var(--amber);
+    }
+    .land-callout .icon-wrap { width: 40px; height: 40px; display: grid; place-items: center; background: #fff7e8; color: var(--amber); }
+    .land-callout strong { display: block; margin-bottom: 4px; }
+    .land-callout p { margin: 0; color: #665337; font-size: 13px; }
+    .admin-status { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; }
+    .admin-status strong { color: var(--green); font-size: 18px; }
+    .admin-timeline { position: relative; display: grid; gap: 12px; }
+    .admin-timeline::before { content: ""; position: absolute; left: 78px; top: 22px; bottom: 22px; width: 2px; background: var(--line); }
+    .admin-item {
+      position: relative; display: grid; grid-template-columns: 158px minmax(0, 1fr); gap: 24px;
+      border: 1px solid var(--line); background: var(--surface);
+    }
+    .admin-item::before {
+      content: ""; position: absolute; z-index: 1; left: 72px; top: 30px;
+      width: 10px; height: 10px; border: 4px solid var(--paper); border-radius: 50%; background: var(--green); box-shadow: 0 0 0 2px var(--green);
+    }
+    .admin-when { padding: 24px 18px 22px 98px; }
+    .admin-when strong { display: block; color: var(--green); font-size: 14px; }
+    .admin-when span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .admin-body { padding: 22px 22px 22px 0; }
+    .admin-body h3 { margin-bottom: 3px; }
+    .admin-body > p { margin-bottom: 14px; color: var(--muted); font-size: 13px; }
+    .admin-tasks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 18px; }
+    .admin-task { display: flex; align-items: flex-start; gap: 9px; padding: 8px 0; border-top: 1px solid #edf0eb; cursor: pointer; }
+    .admin-task input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--green); flex: 0 0 auto; }
+    .admin-task span { font-size: 13px; }
+    .admin-task:has(input:checked) span { color: #7a847d; text-decoration: line-through; }
+    .admin-tag { display: inline-block; margin-bottom: 8px; padding: 3px 7px; border-radius: 3px; background: var(--blue-soft); color: var(--blue); font-size: 11px; font-weight: 800; }
+    .admin-tag.urgent { background: var(--coral-soft); color: var(--coral); }
+    .admin-tag.land { background: var(--amber-soft); color: var(--amber); }
+    .document-table td:first-child { width: 150px; font-weight: 750; color: var(--green); }
+    .source-note { margin-top: 20px; color: var(--muted); font-size: 12px; }
+    .source-note a { color: var(--blue); }
+
     .guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
     .guide-card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
     .guide-card .icon-wrap { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 6px; margin-bottom: 20px; }
@@ -280,6 +329,16 @@
       .month-card summary { grid-template-columns: 68px minmax(0,1fr); gap: 12px; padding: 15px; }
       .temp-chip { grid-column: 2; justify-self: start; }
       .month-content { padding: 0 16px 18px; grid-template-columns: 1fr; gap: 4px; }
+      .process-flow { display: flex; overflow-x: auto; }
+      .process-step { min-width: 190px; }
+      .admin-timeline::before { left: 10px; }
+      .admin-item { margin-left: 30px; grid-template-columns: 1fr; gap: 0; }
+      .admin-item::before { left: -27px; top: 24px; }
+      .admin-when { padding: 16px 16px 0; }
+      .admin-body { padding: 10px 16px 18px; }
+      .admin-tasks { grid-template-columns: 1fr; }
+      .land-callout { grid-template-columns: 1fr; }
+      .document-table td:first-child { width: 112px; }
       .check-layout { grid-template-columns: 1fr; }
       .progress-panel { position: static; }
       .data-table { display: block; overflow-x: auto; white-space: normal; }
@@ -309,6 +368,7 @@
       </div>
       <nav class="nav-list">
         <button class="nav-btn active" data-view="overview"><i data-lucide="layout-dashboard"></i>总览</button>
+        <button class="nav-btn" data-view="admin"><i data-lucide="file-check-2"></i>办事时间线</button>
         <button class="nav-btn" data-view="timeline"><i data-lucide="calendar-range"></i>月龄路线</button>
         <button class="nav-btn" data-view="feeding"><i data-lucide="milk"></i>喂养</button>
         <button class="nav-btn" data-view="sleep"><i data-lucide="moon"></i>睡眠</button>
@@ -355,10 +415,10 @@
           <div class="content-block">
             <div class="block-title"><h2>现在先完成</h2><p>生产前最有价值的四件事</p></div>
             <div class="priority-list">
-              <div class="priority-item"><span class="step-num">01</span><div><b>确认医院与入院路线</b><p>核对待产包、夜间入口、停车、陪护和新生儿用品规定。</p></div></div>
-              <div class="priority-item"><span class="step-num">02</span><div><b>清洁空调与布置睡眠区</b><p>独立硬床、合身床垫、无枕头床围，空调不直吹。</p></div></div>
-              <div class="priority-item"><span class="step-num">03</span><div><b>安装后向式安全座椅</b><p>出院第一次乘车就要使用，不由成人抱着坐车。</p></div></div>
-              <div class="priority-item"><span class="step-num">04</span><div><b>明确产后家庭分工</b><p>喂养、换尿布、清洗、做饭和夜间照护落实到人。</p></div></div>
+              <div class="priority-item"><span class="step-num">01</span><div><b>男女名字各留3个</b><p>预产期前定好短名单，出生后只做最终选择，不让出生医学证明卡在名字上。</p></div></div>
+              <div class="priority-item"><span class="step-num">02</span><div><b>查清油车港土地口径</b><p>先确认妻子成员名册、项目编号和新生儿规则，再决定孩子初始户口。</p></div></div>
+              <div class="priority-item"><span class="step-num">03</span><div><b>确认医院与办证流程</b><p>核对入院路线、出生医学证明、新生儿筛查及“出生一件事”办理方式。</p></div></div>
+              <div class="priority-item"><span class="step-num">04</span><div><b>落实出院安全与分工</b><p>装好后向式安全座椅，明确谁跑手续、谁做饭、谁承担夜间辅助照护。</p></div></div>
             </div>
           </div>
 
@@ -372,6 +432,129 @@
           <div class="alert">
             <i data-lucide="siren"></i><div><strong>必须立即就医</strong><p>3个月以下体温达到38℃；或任何月龄出现呼吸困难、嘴唇发青、抽搐、明显嗜睡叫不醒、拒奶少尿、绿色呕吐。</p></div>
           </div>
+        </section>
+
+        <section class="view" id="admin">
+          <div class="section-head">
+            <div><p class="eyebrow">Birth paperwork</p><h1>从取名到满一岁的办事时间线</h1><p class="lede">日期会跟随总览中的预产期变化。宝宝出生后，把日期改成实际出生日期，后续节点会自动重算。</p></div>
+            <div class="admin-status"><strong id="adminProgress">0/31</strong><span>已完成</span><button class="icon-btn" id="resetAdmin" title="重置办事进度" aria-label="重置办事进度"><i data-lucide="rotate-ccw"></i></button></div>
+          </div>
+
+          <div class="process-flow" aria-label="新生儿办事先后顺序">
+            <div class="process-step"><span>01 · 出生前</span><strong>准备名字短名单</strong><small>男女各3个，核对字形、读音和生僻字。</small></div>
+            <div class="process-step"><span>02 · 出生后</span><strong>确定正式姓名</strong><small>夫妻最终确认，逐字核对，不先上户口。</small></div>
+            <div class="process-step"><span>03 · 住院期</span><strong>出生医学证明</strong><small>法定姓名从这里进入后续证件。</small></div>
+            <div class="process-step"><span>04 · 30天内</span><strong>申报出生户口</strong><small>先根据土地书面口径决定随父或随母。</small></div>
+            <div class="process-step"><span>05 · 紧接办理</span><strong>成员确认与医保</strong><small>两条线分别申请，均保留受理凭证。</small></div>
+          </div>
+
+          <div class="land-callout">
+            <div class="icon-wrap"><i data-lucide="land-plot"></i></div>
+            <div><strong>你们家的特殊重点：上户口不等于取得土地权益</strong><p>如果孩子随母落在油车港，办完户口后还要向妻子所在的农村集体经济组织单独申请成员确认和名册变更。房屋已经拆除，孩子通常不能倒推增加已经锁定的房屋或宅基地补偿；当前要追踪的是尚未结清的土地补偿、社保安置、成员及集体收益权益。</p></div>
+          </div>
+
+          <div class="admin-timeline">
+            <article class="admin-item">
+              <div class="admin-when"><strong>现在就办</strong><span data-offset-start="-40" data-offset-end="-21">预产期前约3—6周</span></div>
+              <div class="admin-body"><span class="admin-tag urgent">不要等生产发动</span><h3>名字短名单与户口路线</h3><p>先准备选项和证据，孩子出生后只做最终决定。</p><div class="admin-tasks">
+                <label class="admin-task"><input type="checkbox" data-admin-check="name-shortlist"><span>男孩、女孩名字各保留3个，并准备1个备用名</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="name-check"><span>核对普通话、嘉兴话谐音、首字母缩写和手机能否正常输入</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="wife-member"><span>取得妻子是否在油车港集体成员名册中的书面确认</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="project-docs"><span>索取征地项目编号、补偿方案、人员截止日和新生儿条款</span></label>
+              </div></div>
+            </article>
+
+            <article class="admin-item">
+              <div class="admin-when"><strong>临产前确认</strong><span data-offset-start="-20" data-offset-end="-1">预产期前约1—3周</span></div>
+              <div class="admin-body"><span class="admin-tag">由爸爸主办手续</span><h3>医院、材料与社区对接</h3><p>把产妇恢复和宝宝照护放在第一位，跑手续的人提前指定。</p><div class="admin-tasks">
+                <label class="admin-task"><input type="checkbox" data-admin-check="hospital-certificate"><span>问生产医院：出生医学证明何时办、在哪里办、需要哪些原件</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="one-thing"><span>在“浙里办”了解“新生儿出生一件事”，不符合联办条件就分开办理</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="document-folder"><span>整理双方身份证、户口簿、结婚证、医保凭证和产检资料</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="community-call"><span>联系常住地社区卫生服务中心，确认访视、儿保和接种门诊</span></label>
+              </div></div>
+            </article>
+
+            <article class="admin-item">
+              <div class="admin-when"><strong>出生至出院</strong><span data-offset-start="0" data-offset-end="3">出生后0—3天</span></div>
+              <div class="admin-body"><span class="admin-tag urgent">姓名逐字核对</span><h3>正式姓名、筛查与出生医学证明</h3><p>出生医学证明是户口、医保等事项的基础，姓名一旦进入证件，修改会增加手续。</p><div class="admin-tasks">
+                <label class="admin-task"><input type="checkbox" data-admin-check="final-name"><span>夫妻确定正式姓名，核对简体规范汉字和每个字的位置</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="birth-certificate"><span>按医院通知申领出生医学证明，领取时检查姓名、性别和父母信息</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="screening"><span>确认听力、遗传代谢病筛查已完成，并保存回执和查询方式</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="birth-vaccine"><span>确认乙肝疫苗、卡介苗接种记录及需要补种或复查的事项</span></label>
+              </div></div>
+            </article>
+
+            <article class="admin-item">
+              <div class="admin-when"><strong>回家第一周</strong><span data-offset-start="1" data-offset-end="7">出生后1—7天</span></div>
+              <div class="admin-body"><span class="admin-tag">先健康，再跑手续</span><h3>新生儿访视与线上申报</h3><p>出现吃奶差、黄疸明显、呼吸异常或体温异常时，先就医，不为赶手续拖延。</p><div class="admin-tasks">
+                <label class="admin-task"><input type="checkbox" data-admin-check="home-visit"><span>与社区确认出院后一周内的新生儿家庭访视</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="feeding-record"><span>记录喂养、尿便、体温和黄疸变化，准备给访视人员查看</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="hukou-final"><span>根据油车港书面答复，最终确定随父或随母申报户口</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="online-submit"><span>材料齐全后提交“出生一件事”或预约对应线下窗口</span></label>
+              </div></div>
+            </article>
+
+            <article class="admin-item">
+              <div class="admin-when"><strong>法定关键期</strong><span data-offset-start="7" data-offset-end="30">出生后30天内</span></div>
+              <div class="admin-body"><span class="admin-tag urgent">户口不要拖过满月</span><h3>户口、成员确认、医保与社保卡</h3><p>四件事可以衔接办理，但法律关系不同，每一步都要确认成功状态。</p><div class="admin-tasks">
+                <label class="admin-task"><input type="checkbox" data-admin-check="hukou-done"><span>完成出生户口登记，并当场核对姓名、身份证号码和家庭关系</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="member-apply"><span>若随母落户油车港，另交集体成员确认申请并保存签收回执</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="medical-insurance"><span>尽快完成城乡居民基本医保参保、缴费，并确认待遇开始时间</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="social-card"><span>申领社会保障卡，确认电子医保凭证及就医结算可正常使用</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="vaccination-book"><span>建立或核对预防接种档案，记下下一次接种日期</span></label>
+              </div></div>
+            </article>
+
+            <article class="admin-item">
+              <div class="admin-when"><strong>满月至42天</strong><span data-offset-start="28" data-offset-end="42">出生后4—6周</span></div>
+              <div class="admin-body"><span class="admin-tag">核验是否真正办结</span><h3>母婴复查与材料回头看</h3><p>不只看“提交成功”，要确认名册、医保和证卡已实际生效。</p><div class="admin-tasks">
+                <label class="admin-task"><input type="checkbox" data-admin-check="month-check"><span>完成满月或42天儿童保健，记录身高、体重、头围和发育情况</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="mother-check"><span>产妇完成产后复查，评估伤口、盆底、血压和情绪状态</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="insurance-test"><span>查询医保参保与缴费状态，确认此前医疗费用能否按规定结算</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="member-result"><span>向村集体追问孩子是否已进入成员名册及备案，取得书面结果</span></label>
+              </div></div>
+            </article>
+
+            <article class="admin-item">
+              <div class="admin-when"><strong>3至6个月</strong><span data-offset-start="90" data-offset-end="180">出生后第3—6个月</span></div>
+              <div class="admin-body"><span class="admin-tag land">土地权益复核</span><h3>证件归档与征地事项跟进</h3><p>没有新通知不代表事项结束，成员名册和补偿进度要留痕复核。</p><div class="admin-tasks">
+                <label class="admin-task"><input type="checkbox" data-admin-check="archive"><span>把出生证、户口页、医保、社保卡、接种证和筛查结果扫描归档</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="land-follow"><span>核对项目补偿、社保安置、留村组资金和集体收益是否有新公示</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="care-routine"><span>按社区安排完成3月龄、6月龄儿保和疫苗接种</span></label>
+              </div></div>
+            </article>
+
+            <article class="admin-item">
+              <div class="admin-when"><strong>6个月至1岁</strong><span data-offset-start="181" data-offset-end="365">出生后第7—12个月</span></div>
+              <div class="admin-body"><span class="admin-tag">年度维护</span><h3>儿保、医保续费与远期教育提醒</h3><p>这一阶段不需要急着买学区房，维持家庭材料连续、孩子健康和稳定互动更重要。</p><div class="admin-tasks">
+                <label class="admin-task"><input type="checkbox" data-admin-check="year-care"><span>完成8月龄、12月龄等当地安排的儿童保健与接种</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="insurance-renew"><span>关注下一年度居民医保集中参保缴费通知，避免断保</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="one-year-archive"><span>满一岁更新证件、健康、成员及土地事项年度台账</span></label>
+              </div></div>
+            </article>
+          </div>
+
+          <div class="content-block">
+            <div class="block-title"><h2>一次准备好的材料袋</h2><p>原件单独保管，手机与网盘各留一份扫描件</p></div>
+            <table class="data-table document-table"><tbody>
+              <tr><td>父母证件</td><td>双方身份证、户口簿、结婚证、医保凭证；证件正反面及关键页扫描件。</td></tr>
+              <tr><td>宝宝证件</td><td>出生医学证明、户口页、医保参保记录、社会保障卡、接种证、筛查结果。</td></tr>
+              <tr><td>土地材料</td><td>妻子成员名册证明、征地项目编号、补偿方案、人员截止日、新生儿书面答复、成员申请回执。</td></tr>
+              <tr><td>健康材料</td><td>出院记录、母子保健手册、喂养及黄疸记录、儿保记录、疫苗接种记录。</td></tr>
+            </tbody></table>
+          </div>
+
+          <div class="content-block">
+            <div class="block-title"><h2>一岁以后只记三个远期节点</h2><p>不需要现在买学区房</p></div>
+            <div class="priority-list">
+              <div class="priority-item"><span class="step-num">2029</span><div><b>开始观察南湖区学校与片区</b><p>关注通勤、家庭预算、学校稳定性和新校建设，不急着成交。</p></div></div>
+              <div class="priority-item"><span class="step-num">2031</span><div><b>形成住房与迁户决定</b><p>预计2033年入学，热门区域建议提前24—36个月核查房产和学额。</p></div></div>
+              <div class="priority-item"><span class="step-num">2033</span><div><b>按当年政策报名小学</b><p>施教区、证件截止日和录取批次必须以南湖区当年文件为准。</p></div></div>
+              <div class="priority-item"><span class="step-num">每年</span><div><b>复核油车港成员与土地台账</b><p>迁户前再次取得书面答复，避免为入学提前放弃尚未明确的权益。</p></div></div>
+            </div>
+          </div>
+
+          <p class="source-note">政策依据提示：出生登记原则上应在出生后一个月内申报；集体成员与土地权益依据项目文件、成员名册及集体决议分别判断。参考 <a href="https://www.gov.cn/yaowen/liebiao/202406/content_6960131.htm" target="_blank" rel="noreferrer">《农村集体经济组织法》</a>、<a href="https://www.xiuzhou.gov.cn/art/2023/12/1/art_1229431049_2499557.html" target="_blank" rel="noreferrer">秀洲区征地区片综合地价标准</a>。具体材料和办理入口以生产医院、“浙里办”、户籍窗口、医保及社区当年通知为准。</p>
         </section>
 
         <section class="view" id="timeline">
@@ -484,6 +667,7 @@
     ];
 
     const checkData = [
+      { title:'办证材料', items:[['name-list','男女名字各准备3个并完成谐音与输入检查'],['land-proof','取得妻子集体成员名册及征地项目书面口径'],['parent-docs','整理身份证、户口簿、结婚证及扫描件'],['certificate-process','向生产医院确认出生医学证明办理流程'],['community-contact','确认常住地社区儿保和接种门诊']] },
       { title:'生产前', items:[['hospital','确认生产医院、夜间入口、停车及陪护规定'],['docs','整理身份证、医保卡、产检档案和检查报告'],['ac','清洁空调滤网，准备温湿度计'],['sleep-space','布置独立硬床，移除枕头、床围和厚被'],['car-seat','正确安装后向式婴儿安全座椅'],['support','确定产后做饭、清洁和夜间照护分工']] },
       { title:'待产包', items:[['mom-bag','哺乳衣2—3套、一次性内裤、产褥垫和卫生巾'],['baby-bag','NB纸尿裤20—30片、薄衣2—3套、纱布包被'],['daily-bag','洗漱用品、水杯、充电器和少量现金'],['exit-clothes','准备产妇和宝宝出院衣物'],['hospital-list','与医院最新版清单逐项核对']] },
       { title:'宝宝回家', items:[['diapers','NB纸尿裤先买1—2包，S码备1包'],['clothes','52码少量、59码4—6套，全部清洗晾干'],['bath','浴盆、浴巾、方巾、护臀膏和体温计'],['feeding-tools','奶瓶1—2个备用，不大量囤奶粉'],['vitd','向医生确认维生素D开始时间和剂量'],['community','联系社区安排新生儿访视和儿保']] },
@@ -510,7 +694,7 @@
       { name:'陈亦宁', pinyin:'Chén Yìníng', strokes:'11画', type:['girl','neutral'], meaning:'在变化中依然保持安定、清醒与坚定。', tags:['低笔画','节奏清楚','中性可用'] }
     ];
 
-    const titles = { overview:'家庭总览', timeline:'月龄路线', feeding:'喂养策略', sleep:'睡眠策略', care:'清洁护理', safety:'安全健康', checklist:'用品清单', names:'名字备选' };
+    const titles = { overview:'家庭总览', admin:'办事时间线', timeline:'月龄路线', feeding:'喂养策略', sleep:'睡眠策略', care:'清洁护理', safety:'安全健康', checklist:'用品清单', names:'名字备选' };
     const icon = (name) => `<i data-lucide="${name}"></i>`;
 
     function createClimate() {
@@ -547,6 +731,46 @@
       document.getElementById('progressText').textContent = `${done} / ${all.length} 项`;
     }
 
+    function initAdminChecks() {
+      const saved = JSON.parse(localStorage.getItem('babyGuideAdmin') || '{}');
+      document.querySelectorAll('[data-admin-check]').forEach(input => {
+        input.checked = Boolean(saved[input.dataset.adminCheck]);
+        input.addEventListener('change', saveAdminChecks);
+      });
+      updateAdminProgress();
+    }
+
+    function saveAdminChecks() {
+      const state = {};
+      document.querySelectorAll('[data-admin-check]').forEach(input => state[input.dataset.adminCheck] = input.checked);
+      localStorage.setItem('babyGuideAdmin', JSON.stringify(state));
+      updateAdminProgress();
+    }
+
+    function updateAdminProgress() {
+      const all = [...document.querySelectorAll('[data-admin-check]')];
+      const done = all.filter(input => input.checked).length;
+      document.getElementById('adminProgress').textContent = `${done}/${all.length}`;
+    }
+
+    function addDays(date, days) {
+      const result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+
+    function formatShortDate(date) {
+      return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+    }
+
+    function updateAdminDates(birth) {
+      document.querySelectorAll('[data-offset-start]').forEach(label => {
+        const start = addDays(birth, Number(label.dataset.offsetStart));
+        const end = addDays(birth, Number(label.dataset.offsetEnd));
+        label.textContent = `${formatShortDate(start)}—${formatShortDate(end)}`;
+      });
+    }
+
     function createNames(filter = 'all') {
       const favorites = JSON.parse(localStorage.getItem('babyGuideNames') || '[]');
       const shown = names.filter(n => filter === 'all' || (filter === 'favorite' ? favorites.includes(n.name) : n.type.includes(filter)));
@@ -578,6 +802,7 @@
         el.innerHTML = `${age} 月龄<small>出生约 ${diffDays} 天</small>`;
       }
       document.querySelectorAll('[data-climate-age]').forEach(x => x.classList.toggle('month-now', Number(x.dataset.climateAge) === age));
+      updateAdminDates(birth);
     }
 
     document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => {
@@ -610,11 +835,17 @@
     });
     document.getElementById('printBtn').addEventListener('click', () => window.print());
     document.getElementById('resetChecklist').addEventListener('click', () => { localStorage.removeItem('babyGuideChecks'); createChecklist(); });
+    document.getElementById('resetAdmin').addEventListener('click', () => {
+      localStorage.removeItem('babyGuideAdmin');
+      document.querySelectorAll('[data-admin-check]').forEach(input => input.checked = false);
+      updateAdminProgress();
+    });
 
     createClimate();
     createTimeline();
     createChecklist();
     createNames();
+    initAdminChecks();
     const savedDate = localStorage.getItem('babyGuideDate');
     if (savedDate) document.getElementById('dueDate').value = savedDate;
     document.getElementById('dueDate').addEventListener('change', updateDate);
