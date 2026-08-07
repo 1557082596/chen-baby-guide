@@ -242,6 +242,30 @@
     .admin-task input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--green); flex: 0 0 auto; }
     .admin-task span { font-size: 13px; }
     .admin-task:has(input:checked) span { color: #7a847d; text-decoration: line-through; }
+    .admin-task-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: stretch; gap: 7px; border-top: 1px solid #edf0eb; }
+    .admin-task-row .admin-task { min-width: 0; border-top: 0; }
+    .admin-detail-btn { align-self: center; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--green); cursor: pointer; }
+    .admin-detail-btn:hover { border-color: var(--green); background: var(--green-soft); }
+    .admin-detail-btn:focus-visible { outline: 3px solid rgba(53, 102, 80, .2); outline-offset: 2px; }
+    .admin-detail-btn svg { width: 17px; height: 17px; }
+    .detail-dialog { width: min(760px, calc(100vw - 32px)); max-height: min(86vh, 820px); padding: 0; border: 0; border-radius: 6px; background: var(--paper); color: var(--ink); box-shadow: 0 24px 70px rgba(24, 36, 29, .28); overflow: hidden; }
+    .detail-dialog::backdrop { background: rgba(24, 34, 29, .58); backdrop-filter: blur(2px); }
+    .detail-head { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: start; padding: 20px 22px 16px; border-bottom: 1px solid var(--line); background: var(--paper); }
+    .detail-head h2 { margin: 2px 0 5px; font-size: 21px; line-height: 1.35; }
+    .detail-kicker { color: var(--green); font-size: 11px; font-weight: 850; text-transform: uppercase; }
+    .detail-verified { color: var(--muted); font-size: 12px; }
+    .detail-scroll { max-height: calc(min(86vh, 820px) - 92px); padding: 0 22px 24px; overflow-y: auto; overscroll-behavior: contain; }
+    .detail-timing { margin: 18px 0 4px; padding: 12px 14px; border-left: 4px solid var(--amber); background: var(--amber-soft); color: #654d16; font-size: 13px; }
+    .detail-section { padding: 18px 0 2px; border-top: 1px solid var(--line); }
+    .detail-section:first-of-type { border-top: 0; }
+    .detail-section h3 { margin-bottom: 9px; font-size: 14px; color: var(--green); }
+    .detail-section ul { margin: 0; padding-left: 20px; color: #38433d; }
+    .detail-section li { margin: 6px 0; font-size: 13px; line-height: 1.65; }
+    .detail-note { margin-top: 18px; padding: 13px 14px; background: var(--blue-soft); color: #31505e; font-size: 12px; line-height: 1.65; }
+    .detail-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .detail-links a { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--blue); font-size: 12px; font-weight: 750; }
+    .detail-links a:hover { border-color: var(--blue); }
+    .detail-links svg { width: 14px; height: 14px; }
     .admin-tag { display: inline-block; margin-bottom: 8px; padding: 3px 7px; border-radius: 3px; background: var(--blue-soft); color: var(--blue); font-size: 11px; font-weight: 800; }
     .admin-tag.urgent { background: var(--coral-soft); color: var(--coral); }
     .admin-tag.land { background: var(--amber-soft); color: var(--amber); }
@@ -342,6 +366,10 @@
       .admin-when { padding: 16px 16px 0; }
       .admin-body { padding: 10px 16px 18px; }
       .admin-tasks { grid-template-columns: 1fr; }
+      .detail-dialog { width: calc(100vw - 20px); max-height: 90vh; }
+      .detail-head { padding: 17px 16px 14px; }
+      .detail-head h2 { font-size: 18px; }
+      .detail-scroll { max-height: calc(90vh - 84px); padding: 0 16px 20px; }
       .land-callout { grid-template-columns: 1fr; }
       .document-table td:first-child { width: 112px; }
       .subsidy-table td:first-child, .subsidy-table td:nth-child(2) { width: auto; }
@@ -351,7 +379,7 @@
     }
     @media print {
       body { background: white; font-size: 11pt; }
-      .sidebar, .topbar, .segmented, .heart-btn, .action-btn, .icon-btn { display: none !important; }
+      .sidebar, .topbar, .segmented, .heart-btn, .action-btn, .icon-btn, .admin-detail-btn, .detail-dialog { display: none !important; }
       .app-shell { display: block; }
       main { width: 100%; padding: 0; }
       .view { display: block !important; page-break-before: always; }
@@ -681,6 +709,21 @@
     </div>
   </div>
 
+  <dialog class="detail-dialog" id="adminDetailDialog" aria-labelledby="adminDetailTitle">
+    <div class="detail-head">
+      <div>
+        <div class="detail-kicker">办理说明 · Jiaxing</div>
+        <h2 id="adminDetailTitle">事项办理说明</h2>
+        <div class="detail-verified">资料核验至 2026年8月，提交前再向办理单位确认一次</div>
+      </div>
+      <button class="icon-btn" id="closeAdminDetail" type="button" title="关闭办理说明" aria-label="关闭办理说明"><i data-lucide="x"></i></button>
+    </div>
+    <div class="detail-scroll">
+      <div class="detail-timing" id="adminDetailTiming"></div>
+      <div id="adminDetailBody"></div>
+    </div>
+  </dialog>
+
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <script>
     const monthData = [
@@ -744,6 +787,60 @@
 
     const titles = { overview:'家庭总览', admin:'办事时间线', timeline:'月龄路线', feeding:'喂养策略', sleep:'睡眠策略', care:'清洁护理', safety:'安全健康', checklist:'用品清单', names:'名字备选' };
     const icon = (name) => `<i data-lucide="${name}"></i>`;
+    const officialSources = {
+      zjPortal: { label:'浙江政务服务网', url:'https://www.zjzwfw.gov.cn/' },
+      birthFriendly: { label:'浙里办 · 生育友好', url:'https://mapi.zjzwfw.gov.cn/web/mgop/gov-open/zj/2001826196/reserved/index.html' },
+      zjMedical: { label:'浙里办 · 浙里医保', url:'https://mapi.zjzwfw.gov.cn/web/mgop/gov-open/zj/2001833543/reserved/index.html#/' },
+      zjVaccine: { label:'浙里办 · 浙里接种', url:'https://mapi.zjzwfw.gov.cn/web/mgop/gov-open/zj/2001101254/reserved/vaccine-external-front/html/home/index.html' },
+      jxHealth: { label:'嘉兴市卫生健康委', url:'https://wsjkw.jiaxing.gov.cn/' },
+      jxMedical: { label:'嘉兴市医疗保障局', url:'https://ybj.jiaxing.gov.cn/' },
+      jxPolice: { label:'嘉兴市公安局', url:'https://gaj.jiaxing.gov.cn/' },
+      jxHr: { label:'嘉兴市人力社保局', url:'https://rlsbj.jiaxing.gov.cn/' },
+      nanhu: { label:'南湖区人民政府', url:'https://www.nanhu.gov.cn/' },
+      xiuzhou: { label:'秀洲区人民政府', url:'https://www.xiuzhou.gov.cn/' },
+      subsidy: { label:'嘉兴市生育补助现行方案', url:'https://wsjkw.jiaxing.gov.cn/col/col1229456608/art/2026/art_f82a0d544ed549e6a60f023e0694e713.html' },
+      tax: { label:'税务总局婴幼儿照护扣除问答', url:'https://www.chinatax.gov.cn/chinatax/n810356/n3010387/c5173939/content.html' },
+      collectiveLaw: { label:'农村集体经济组织法', url:'https://www.gov.cn/yaowen/liebiao/202406/content_6960131.htm' }
+    };
+    const detail = (timing, steps, materials, questions, sources = [], note = '') => ({ timing, steps, materials, questions, sources, note });
+    const adminDetails = {
+      'name-shortlist': detail('预产期前完成，临产包中放一张最终候选表。', ['男女各筛选3个主选名，再各留1个备用名','把姓和名连读，避免生硬、绕口或容易被起外号','夫妻先约定最终拍板方法，出生后不临时海选'], ['候选姓名表：汉字、拼音、单字含义、总笔画','纸质一份并在双方手机保存'], ['是否使用规范简体字、能否在手机和电脑正常输入','与“陈”连读是否清楚，长辈用嘉兴话读是否有不良谐音'], [], '这是家庭准备事项，不需要先去窗口。姓名进入出生医学证明后再修改会明显增加手续。'),
+      'name-check': detail('候选名缩小后、正式领取出生医学证明前各检查一次。', ['普通话快速连读10遍，再请本地长辈用嘉兴话读','检查姓名首字母、拼音缩写和常见社交平台搜索结果','在手机输入法、电脑和方格纸上分别输入或书写'], ['候选姓名表','手机、电脑和方格纸'], ['是否存在明显同名公众人物或高频网络梗','字形是否容易认错，孩子入学后能否轻松书写'], [], '公安重名查询入口可能随平台调整，可在浙里办或户籍窗口咨询。'),
+      'wife-member': detail('现在就办，必须早于孩子落户和任何迁户决定。', ['由妻子本人向所在村集体经济组织查询成员名册','要求说明当前成员认定办法以及新生儿新增流程','尽量取得盖章证明、查询回执或书面答复'], ['妻子身份证、户口簿、结婚证','已有成员证、股权证、分红记录或名册证明','拆迁、征地、安置协议及相关通知'], ['妻子当前是否仍是集体成员，成员资格依据哪份名册','新生儿是否需要先落本集体户口，是否另行申请','项目人员锁定日和孩子出生时间会产生什么影响'], ['xiuzhou','collectiveLaw'], '户口登记不自动等于取得集体成员资格。口头答复要记下日期、部门和经办人，关键结论尽量书面化。'),
+      'project-docs': detail('孩子出生前尽量取得，后续每次沟通都使用同一项目编号。', ['向村、镇或项目实施单位索取征地公告和补偿安置方案','找到人员认定基准日、成员范围和新增人口条款','把未结清的土地补偿、社保安置、集体收益分别列账'], ['征地项目名称和编号','征地公告、补偿安置方案、安置协议','人员名单、公示截图和历史沟通记录'], ['房屋已拆后，尚未完成的是土地补偿还是其他权益','新生儿对未结项目是否有申报窗口和截止日','作出否定答复的依据条款是什么'], ['xiuzhou','collectiveLaw'], '不要把已经锁定的房屋补偿与尚未结清的土地、成员、集体收益权益混在一起。'),
+      'hospital-certificate': detail('产检后期询问一次，入院后再向产科护士站确认。', ['直接问生产医院出生医学证明办理窗口和开放时间','确认是住院期间办理还是出院后预约领取','确认父亲代办时是否需要母亲签授权书或现场核验'], ['父母双方有效身份证原件','医院提供的首次签发登记表或领取通知','代办人的身份证及母亲授权材料，是否需要以医院答复为准'], ['姓名最晚何时确定，能否出院后再办','父母身份证信息与住院登记不一致如何更正','单亲、非婚生、外籍或证件异常需要补哪些材料'], ['jxHealth'], '出生医学证明由分娩机构按规定签发，但窗口时间、授权书格式和复印件要求由医院具体告知。'),
+      'one-thing': detail('预产期前先了解入口，出生证明信息确认后再正式提交。', ['打开浙里办搜索“新生儿出生一件事”或进入“生育友好”','查看当前可联办事项和系统自动调取的电子证照','不符合联办条件时，把出生证、落户、医保和社保卡拆开办理'], ['父母身份证、户口簿、结婚证','出生医学证明、拟落户地址及新生儿正式姓名','监护人手机号、收件地址和可能需要的银行卡信息'], ['父母户籍地不同能否联办','随母落油车港时系统应选择哪个受理地','哪些事项提交后仍需线下核验原件'], ['zjPortal','birthFriendly'], '平台事项会更新。进入后以系统列出的适用条件、材料和受理机关为准，提交前截图保存申请编号。'),
+      'document-folder': detail('预产期前整理完，住院时只带必要原件，其余扫描件云端备份。', ['按“父亲、母亲、宝宝、土地权益”分四个文件袋','证件正反面和户口簿关键页分别扫描','给跑手续的人一份目录，原件借出和归还要登记'], ['双方身份证、户口簿、结婚证、医保凭证','产检档案、母子健康手册、重要检查报告','妻子集体成员及征地拆迁资料'], ['证件是否临近过期，姓名和身份证号是否一致','户口簿首页、户主页和本人页是否齐全'], [], '不要在聊天群长期发送无遮挡证件照片；网盘备份建议加密，纸质原件单独保管。'),
+      'community-call': detail('预产期前2—4周联系；出院当天把出生和居住信息再报一次。', ['按实际常住地址确认对应社区卫生服务中心，而不是只按户口地猜','分别确认产后访视、新生儿访视、儿童保健和预防接种门诊','记录科室、电话、门诊日期、建档方式和是否需要预约'], ['常住地址、父母姓名和联系电话','母子健康手册、预产期和生产医院信息','出生后补充出院记录、接种和筛查记录'], ['访视是电话预约还是医院自动推送信息','儿保与接种是否在同一地点，首次要带什么','节假日出生或跨区居住如何转介'], ['nanhu','jxHealth','zjVaccine'], '你们定居南湖区，应先按南湖实际居住街道联系；妻子户口在油车港不等于宝宝日常儿保必须去油车港。'),
+      'final-name': detail('出生后、填写出生医学证明前最终确定。', ['夫妻对照候选表确定正式姓名','逐字核对字形、顺序、拼音和性别适用感','在医院表格填写后由另一人再次复核'], ['最终姓名纸条和手机备份','父母身份证，便于核对姓氏和证件信息'], ['是否为规范汉字，医院系统能否录入','备用名是否仍保留，以防系统无法录入个别字'], ['zjPortal'], '不要只在口头确认后让一人独自填写；证件姓名必须逐字复核。'),
+      'birth-certificate': detail('按生产医院通知办理，建议尽早办妥后再启动落户。', ['在医院签发窗口提交材料并确认新生儿姓名','领取时核对宝宝姓名、性别、出生时间地点和父母信息','确认无误后妥善保存正页和副页，不自行塑封或涂改'], ['父母有效身份证原件','首次签发登记表及医院要求的领取材料','非母亲领取时准备授权书和领取人身份证'], ['发现错字能否当场退回更正','超过医院建议期限办理需增加什么材料','副页由哪个户籍窗口留存'], ['jxHealth'], '材料以分娩医院一次性告知为准。发现错误应在离开窗口前处理，不要自行修改。'),
+      'screening': detail('住院期间完成采样或检查，出院前确认结果查询方式。', ['确认新生儿听力筛查是否完成及结果','确认遗传代谢病筛查采血是否完成','保存条码、回执、查询二维码和复查通知'], ['母子健康手册或医院筛查记录','筛查缴费或采样回执','复查时带出生证明或医院病历号'], ['结果多久能查，异常或可疑由谁通知','早产、转院、未达采血条件如何补筛','听力未通过的复筛时间和地点'], ['jxHealth','birthFriendly'], '筛查“未通过”不等于确诊，必须按通知及时复筛或转诊。'),
+      'birth-vaccine': detail('出生住院期间核对，出院前取得接种记录。', ['确认首剂乙肝疫苗和卡介苗是否已接种','如因低体重、疾病等暂缓，取得补种说明','把医院记录带到常住地接种门诊建档'], ['医院接种记录或母子健康手册','出院记录和暂缓接种说明','父母联系方式及常住地址'], ['下一针何时、到哪个门诊','乙肝表面抗原阳性母亲的宝宝是否有额外处置和复查','卡介苗接种后局部反应如何观察'], ['zjVaccine','jxHealth'], '接种时间以医院和预防接种门诊安排为准；有暂缓情形不能自行决定补种日期。'),
+      'home-visit': detail('国家基本公卫通常要求出院后一周内访视，出院当天主动联系最稳妥。', ['向社区报告宝宝出生日期、出院日期和实际居住地址','约定上门时间并保持电话畅通','提前准备安静、温暖、光线充足的检查空间'], ['母子健康手册、出院记录','出生接种和筛查记录','近期喂养、尿便、体温和黄疸记录'], ['访视人员会检查哪些项目','黄疸达到什么程度需直接就医','后续满月儿保在哪里预约'], ['nanhu','jxHealth'], '若宝宝出现呼吸困难、吃奶明显减少、发热或反应差，应直接就医，不等待上门访视。'),
+      'feeding-record': detail('从出生第一天开始，至少记录到首次家庭访视和满月检查。', ['每天记录喂奶时间和大致方式，不必追求精确到每毫升','记录尿布数量、便色、体温、黄疸变化和精神状态','异常情况拍照并记时间，方便医生判断趋势'], ['纸质表或手机记录','体温计、尿布和出院喂养建议','有黄疸监测结果时一并保存'], ['哪些表现需要当日就医','母乳、配方奶或混合喂养是否需要调整','体重下降和恢复是否在可接受范围'], ['jxHealth'], '记录是为了发现趋势，不要因为追求数据而延误喂养、休息或就医。'),
+      'hukou-final': detail('出生医学证明办理前后完成最终决定，最迟在提交出生登记前定案。', ['把随父、随母两条路线分别列出教育、常住、土地权益影响','只采信油车港村集体和项目单位的书面口径','夫妻确认后把选择和理由写入家庭台账'], ['双方户口簿、现居住证明','油车港成员资格和项目书面答复','南湖未来居住与入学规划'], ['随母落户是否是申请成员认定的必要条件还是充分条件','未来迁到南湖会不会影响尚未结清的油车港权益','落户地派出所需要哪些额外材料'], ['xiuzhou','nanhu','jxPolice','collectiveLaw'], '户口可以迁移，但集体成员和征地权益可能有独立规则。没有书面答复前不要为了便利匆忙迁户。'),
+      'online-submit': detail('出生医学证明领取并核对无误后提交。', ['进入浙里办联办入口，逐项阅读适用条件','上传或授权调取材料，保存提交编号和截图','分别检查户口、医保、社保卡是否都显示已受理或办结'], ['出生医学证明、父母身份证和户口簿','结婚证、监护人联系方式和收件地址','系统提示的照片、授权或补充材料'], ['联办失败是哪一个子事项失败','补正材料能否线上提交','多久未更新状态需要联系哪个部门'], ['zjPortal','birthFriendly'], '“提交成功”不等于所有事项办结。每个子事项都要看到明确结果。'),
+      'hukou-done': detail('《户口登记条例》要求婴儿出生后一个月以内申报出生登记，建议出生证办好后立即办理。', ['线上联办或到拟落户地派出所户籍窗口申报','领取户口页后核对姓名、性别、出生日期、身份证号码和亲属关系','扫描户口页并把原件放回证件袋'], ['出生医学证明','拟落户方户口簿、父母身份证和结婚证','非标准情形按公安机关一次性告知补充材料'], ['是否已生成公民身份号码','户口页何时可以用于医保和社保卡','跨区或集体户是否需要户主、单位材料'], ['zjPortal','jxPolice'], '户籍材料因家庭结构和户口类型差异较大，线上不适用时直接预约拟落户地户籍窗口。'),
+      'member-apply': detail('若决定随母落油车港，户口办结后马上单独申请，不要等待自动入册。', ['向村集体经济组织提交新生儿成员认定申请','要求收件人在材料清单或申请副本上签收盖章','同步询问是否还要向镇级部门备案'], ['孩子户口页、出生医学证明','父母身份证、户口簿、结婚证','妻子成员证明、征地项目资料和书面申请'], ['受理依据、审核主体和预计答复时间','是否需要成员大会或理事会程序','不同意认定时能否提供书面理由和救济渠道'], ['xiuzhou','collectiveLaw'], '这一步与公安落户、医保参保互不替代。申请表和签收回执要长期保存。'),
+      'medical-insurance': detail('户口和身份信息生成后尽快办，建议不要拖过出生后30天。', ['通过浙里医保、出生联办或医保经办窗口办理城乡居民参保登记','按系统提示完成缴费并保存电子回单','确认待遇起始日和出生后已发生费用能否按规则追溯结算'], ['孩子户口页或身份信息、出生医学证明','监护人身份证和联系方式','缴费银行卡或系统要求的支付方式'], ['嘉兴当年度新生儿参保截止时间','待遇是否从出生日起计算以及费用补报流程','孩子落油车港或南湖分别由哪个经办地审核'], ['zjMedical','jxMedical'], '新生儿参保和缴费政策按年度调整，必须向嘉兴医保确认当年截止时间和待遇追溯口径。医保咨询可拨12393。'),
+      'social-card': detail('孩子身份号码生成、医保参保信息可查询后办理。', ['通过浙里办或合作银行社会保障卡服务申请','选择制卡银行和领卡或邮寄方式','领卡后核验社保功能、银行功能和电子医保凭证'], ['孩子户口页或身份证号码','监护人身份证和监护关系材料','照片要求、银行卡要求以申请页面或银行告知为准'], ['婴幼儿是否免照片或可后补照片','实体卡未到前能否使用电子医保凭证','监护人代办需要什么授权或关系证明'], ['zjPortal','jxHr','jxMedical'], '社保卡制卡银行和照片规则可能变化，先在浙里办查看当前网点要求。人社咨询可拨12333。'),
+      'vaccination-book': detail('出院后尽快在常住地接种门诊建档，最晚在下一针疫苗前完成。', ['携带医院出生接种记录到常住地预防接种门诊','核对宝宝信息、既往接种和下一次预约日期','在浙里接种绑定宝宝并开启提醒'], ['出生医院接种记录、母子健康手册','出生医学证明或户口信息','父母身份证、联系电话和常住地址'], ['首次建档是否需要预约','异地接种或跨区迁居如何转档','暂缓接种的宝宝何时复评'], ['zjVaccine','jxHealth'], '接种门诊按实际居住和服务范围管理，材料要求以对应门诊通知为准。'),
+      'childcare-subsidy': detail('户口和收款信息准备好后尽快申请；按当前规则可在出生当年或次年首次申请。', ['从国家育儿补贴信息管理系统或户籍地镇街入口申请','确认孩子户籍、监护人和收款账户信息','每年关注续领通知并保存审核、发放记录'], ['父母或监护人身份证、户口簿','孩子出生医学证明和户口页','收款银行卡或社会保障卡及系统要求的声明'], ['孩子户籍在油车港时由哪个镇街审核','首次申请后下一年度是否需要主动确认','审核退回的补正时限和原因'], ['subsidy','birthFriendly'], '当前嘉兴口径为每孩每年3600元，补贴至满3周岁；以后年度金额、入口和材料以当年通知为准。'),
+      'maternal-subsidy': detail('孩子出生、出生医学证明可用后申请，建议出生当年完成。', ['进入“善育在嘉”或浙里办“生育友好”申请孕产补助','按母亲户籍、孩次和出生时间填写','保存审核状态和发放批次'], ['母亲身份证、嘉兴户口簿和结婚证','孩子出生医学证明和户口页','收款银行卡或社会保障卡'], ['母亲油车港户籍由秀洲区哪个单位审核','孩次认定需要补充哪些信息','退回后如何修改和再次提交'], ['subsidy','birthFriendly'], '现行方案以母亲嘉兴户籍等条件审核，一孩1000元、二孩2000元、三孩3000元；申请时以系统展示为准。'),
+      'medical-subsidy': detail('孩子居民医保参保缴费生效后申请。', ['先查询参保和缴费状态确已生效','从“善育在嘉”或“生育友好”提交参保补助申请','保存未重复享受其他补助的承诺和审核记录'], ['孩子嘉兴户口页、出生医学证明','城乡居民医保参保缴费凭证','监护人证件、收款账户和相关承诺'], ['一孩、二孩、三孩对应补助比例如何认定','当年缴费后何时可以申请','跨区参保由户籍地还是参保地审核'], ['subsidy','jxMedical','birthFriendly'], '现行方案按一孩20%、二孩50%、三孩100%补助个人缴费，补助至满3周岁；不能重复享受同类缴费补助。'),
+      'third-child-subsidy': detail('仅三孩家庭办理，出生户口首次申报完成后尽快申请。', ['确认孩子属于政策口径中的第三孩','确认出生户口首次申报在嘉兴市','通过现行嘉兴生育补助入口提交一次性补助'], ['父母身份证、户口簿、结婚证','三个孩子的出生及户籍信息','收款银行卡或社会保障卡'], ['孩次认定遇到再婚、收养等情形如何计算','是否与孕产补助、育儿补贴同时享受','申请截止日和补正时限'], ['subsidy','birthFriendly'], '现行方案为符合条件的三孩一次性9200元，特殊家庭结构必须让审核部门书面确认孩次口径。'),
+      'tax-deduction': detail('取得宝宝身份信息后即可填报，夫妻先约定扣除比例。', ['打开个人所得税APP进入专项附加扣除','选择3岁以下婴幼儿照护并填写孩子和监护人信息','选择一方100%或双方各50%，再选择申报方式'], ['孩子姓名、证件类型和号码、出生日期','父母身份信息和夫妻约定的分配方式','通常申报即可享受，资料留存备查'], ['由一方还是双方扣除更合适','通过单位按月扣除还是年度汇算申报','年度内分配方式能否变更'], ['tax'], '当前标准为每个婴幼儿每月2000元税前定额扣除，不是现金补贴；选定分配方式后一个纳税年度内通常不能变更。税务咨询可拨12366。'),
+      'month-check': detail('按社区安排在满月或出生后约42天完成，先确认当地实际节点。', ['预约儿童保健门诊并询问是否与疫苗同日','携带喂养和生长记录接受体格、发育和喂养评估','记录身高、体重、头围和下次随访时间'], ['母子健康手册、儿童保健册','出生医学证明或户口信息','出院记录、筛查接种记录和喂养记录'], ['黄疸、吐奶、排便或睡眠问题是否需要转诊','维生素D和喂养方案是否调整','下一次儿保和接种日期'], ['nanhu','jxHealth'], '儿保不是只称体重。把家庭最担心的3个问题提前写好，现场逐项问清。'),
+      'mother-check': detail('通常产后约42天，按生产医院或社区通知预约。', ['优先确认由生产医院还是辖区妇保机构复查','检查伤口、子宫恢复、血压、贫血、盆底和哺乳情况','主动说明睡眠、焦虑、情绪低落或家庭支持不足'], ['产妇身份证、医保凭证','母子健康手册、出院记录和用药清单','剖宫产或并发症相关检查报告'], ['恶露、伤口或疼痛是否正常','盆底评估和康复是否必要','避孕、哺乳用药和情绪筛查如何安排'], ['jxHealth','birthFriendly'], '出现大量出血、持续高热、胸痛气促、剧烈头痛或伤口明显异常时不要等42天复查，应立即就医。'),
+      'insurance-test': detail('参保缴费后立即查一次，首次使用医保前再查一次。', ['在浙里医保查询参保地、险种、缴费和待遇状态','测试电子医保凭证能否绑定和展示','整理出生后已发生费用，询问是否能补结算或零星报销'], ['孩子户口页或身份号码','参保缴费回单','医疗发票、费用清单、病历和出院记录'], ['待遇开始日期是否覆盖出生后的费用','原来全额自费的票据如何申请报销','跨区就医或异地住院是否要备案'], ['zjMedical','jxMedical'], '不要只看缴费成功，要确认待遇状态已生效。涉及费用补报时保留发票原件。'),
+      'member-result': detail('提交成员申请后按承诺时间追踪；没有承诺时间可在2—4周后书面询问。', ['带申请回执向村集体查询审核进度','要求明确孩子是否已录入成员名册及备案日期','未通过时索取书面理由、依据和后续程序'], ['成员申请签收回执','孩子户口页和出生医学证明','妻子成员证明及项目材料'], ['审核由谁决定，是否经过理事会或成员大会','名册变更何时公示、在哪里查看','是否影响未结土地补偿、社保安置或集体分配'], ['xiuzhou','collectiveLaw'], '没有通知不代表自动办结。电话沟通后补发书面询问并保留送达记录。'),
+      'archive': detail('证件基本办齐后做第一次完整归档，以后每季度补充。', ['原件按证件类型放入防潮文件袋','手机扫描为PDF并统一命名日期和版本','本地加密盘与可信网盘各保留一份'], ['出生证、户口页、医保和社保卡资料','接种证、筛查、儿保和出院记录','土地成员申请、回执、公示和书面答复'], ['哪些原件不可塑封或打孔','哪些材料未来迁户、入学或理赔会再次使用'], [], '建议文件名使用“日期-事项-姓名-状态”，例如“2026-10-08-医保参保-陈某-已办结.pdf”。'),
+      'land-follow': detail('至少每月查看一次项目公示；收到新通知时立即核对人员和金额。', ['关注村务公开栏、秀洲区政府和项目通知','按土地补偿、社保安置、留村组资金、集体收益四类分别记录','发现名单遗漏时在公示期内书面提出异议'], ['项目编号、补偿方案和历史人员名单','妻子及孩子成员资格材料','每次公示截图、异议书和签收凭证'], ['本次公示对应哪个补偿项目和基准日','孩子是否进入相应名单，未进入的具体依据','异议期限、受理单位和复核程序'], ['xiuzhou','collectiveLaw'], '公示期限往往比整体项目周期短。截图要包含网址、发布日期或公示现场位置。'),
+      'care-routine': detail('按社区预约完成3月龄、6月龄儿保，并对照接种计划。', ['提前一周查看儿保和接种预约','把动作、喂养、睡眠和异常表现整理成问题清单','每次结束后记录结果、医嘱和下一次日期'], ['儿童保健册、预防接种证','医保凭证和既往检查记录','近期喂养、生长和过敏记录'], ['儿保与接种能否同日完成','发育筛查异常如何复评或转诊','6月龄辅食、铁和口腔护理如何安排'], ['nanhu','jxHealth','zjVaccine'], '儿保时间可因早产或健康状况调整；早产儿应询问使用实际月龄还是矫正月龄评估。'),
+      'year-care': detail('按当地儿保计划完成8月龄、12月龄检查和相应接种。', ['提前核对接种证是否有漏种或延迟','12月龄儿保重点询问动作、语言、听力、视力和饮食过渡','有异常时当场取得复评时间和转诊方向'], ['儿童保健册、接种证和医保凭证','近期身高体重、饮食和睡眠记录','既往异常检查、过敏和用药资料'], ['一岁体检是否包含血常规、视力或听力筛查','语言、扶站或进食落后到什么程度需要评估','一岁后奶量和家庭饮食如何调整'], ['nanhu','jxHealth','zjVaccine'], '检查项目以当地门诊和宝宝个体情况为准，不因同龄比较自行给孩子补药或强化训练。'),
+      'insurance-renew': detail('每年居民医保集中缴费期开始时办理；补贴续领按当年通知确认。', ['关注嘉兴医保和户籍地镇街年度缴费通知','核对孩子参保地、缴费金额和待遇连续状态','分别确认育儿补贴、医保参保补助是否需要续领操作'], ['孩子户口页、监护人身份证','上一年度参保缴费和补贴发放记录','收款账户及系统要求的年度确认材料'], ['本年度是否自动续保或必须重新缴费','补贴是否自动续发，信息变化如何修改','迁户后由原地还是新户籍地接续审核'], ['jxMedical','subsidy','birthFriendly'], '年度政策会变，页面根据出生年份显示的续领年份只是提醒；金额、集中缴费期和入口必须看当年公告。'),
+      'one-year-archive': detail('满一岁后做一次年度总复核，以后每年固定一个月份更新。', ['核对证件、医保、接种、儿保和补贴状态','更新家庭住址、电话、收款账户和紧急联系人','复核油车港成员名册、土地项目和南湖教育准备记录'], ['一岁体检与接种记录','证件及年度参保缴费凭证','补贴发放记录、成员名册和土地台账'], ['是否有漏办、待补正或即将到期事项','迁户、换房前哪些权益必须先取得书面确认'], ['nanhu','xiuzhou','jxMedical'], '把“已提交、已受理、已办结、已到账”分开记录，避免把提交成功误当成事项完成。')
+    };
 
     function getMonthInfo(birth, age) {
       const date = new Date(birth.getFullYear(), birth.getMonth() + age, 1);
@@ -816,6 +913,60 @@
       const all = [...document.querySelectorAll('[data-admin-check]')];
       const done = all.filter(input => input.checked).length;
       document.getElementById('adminProgress').textContent = `${done}/${all.length}`;
+    }
+
+    function detailSection(title, items) {
+      if (!items?.length) return '';
+      return `<section class="detail-section"><h3>${title}</h3><ul>${items.map(item => `<li>${item}</li>`).join('')}</ul></section>`;
+    }
+
+    function openAdminDetail(id) {
+      const data = adminDetails[id];
+      const input = document.querySelector(`[data-admin-check="${id}"]`);
+      if (!data || !input) return;
+      const dialog = document.getElementById('adminDetailDialog');
+      document.getElementById('adminDetailTitle').textContent = input.nextElementSibling.textContent.trim();
+      document.getElementById('adminDetailTiming').innerHTML = `<strong>建议时间：</strong>${data.timing}`;
+      const links = data.sources.map(key => officialSources[key]).filter(Boolean);
+      document.getElementById('adminDetailBody').innerHTML = [
+        detailSection('怎么做', data.steps),
+        detailSection('建议带上／提前准备', data.materials),
+        detailSection('给医院、社区或窗口的问题', data.questions),
+        links.length ? `<section class="detail-section"><h3>官方入口</h3><div class="detail-links">${links.map(source => `<a href="${source.url}" target="_blank" rel="noreferrer">${icon('external-link')}${source.label}</a>`).join('')}</div></section>` : '',
+        `<div class="detail-note"><strong>变动提醒：</strong>${data.note || '办理入口、材料和受理范围可能调整，提交前向实际受理单位确认，并保存申请编号或书面回执。'}</div>`
+      ].join('');
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+      else dialog.setAttribute('open', '');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeAdminDetail() {
+      const dialog = document.getElementById('adminDetailDialog');
+      if (typeof dialog.close === 'function') dialog.close();
+      else dialog.removeAttribute('open');
+    }
+
+    function initAdminDetailButtons() {
+      document.querySelectorAll('[data-admin-check]').forEach(input => {
+        const label = input.closest('.admin-task');
+        if (!label || label.parentElement.classList.contains('admin-task-row')) return;
+        const row = document.createElement('div');
+        row.className = 'admin-task-row';
+        label.parentNode.insertBefore(row, label);
+        row.appendChild(label);
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'admin-detail-btn';
+        button.title = '查看办理说明';
+        button.setAttribute('aria-label', `查看“${label.textContent.trim()}”办理说明`);
+        button.innerHTML = icon('circle-help');
+        button.addEventListener('click', () => openAdminDetail(input.dataset.adminCheck));
+        row.appendChild(button);
+      });
+      document.getElementById('closeAdminDetail').addEventListener('click', closeAdminDetail);
+      document.getElementById('adminDetailDialog').addEventListener('click', event => {
+        if (event.target.id === 'adminDetailDialog') closeAdminDetail();
+      });
     }
 
     function addDays(date, days) {
@@ -947,6 +1098,7 @@
     createChecklist();
     createNames();
     initAdminChecks();
+    initAdminDetailButtons();
     const savedDate = localStorage.getItem('babyGuideDate');
     if (savedDate) document.getElementById('dueDate').value = savedDate;
     document.getElementById('dueDate').addEventListener('change', updateDate);
