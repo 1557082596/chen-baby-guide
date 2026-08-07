@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>小陈成长手册｜嘉兴 0—1 岁</title>
+  <style>
+    :root {
+      --paper: #f6f7f3;
+      --surface: #fcfdf9;
+      --ink: #17231d;
+      --muted: #647168;
+      --line: #d9dfd8;
+      --green: #276b57;
+      --green-soft: #e5f1eb;
+      --coral: #c9573f;
+      --coral-soft: #fae9e4;
+      --blue: #466d91;
+      --blue-soft: #e7eef5;
+      --amber: #a66b12;
+      --amber-soft: #f7edd7;
+      --plum: #775a74;
+      --plum-soft: #eee8ed;
+      --danger: #a83f35;
+      --danger-soft: #fae4e0;
+      --shadow: 0 10px 28px rgba(27, 48, 37, 0.07);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+      line-height: 1.65;
+      letter-spacing: 0;
+    }
+    button, input { font: inherit; letter-spacing: 0; }
+    button { color: inherit; }
+    button:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 3px solid rgba(70, 109, 145, 0.28);
+      outline-offset: 2px;
+    }
+
+    .app-shell { min-height: 100vh; display: grid; grid-template-columns: 248px minmax(0, 1fr); }
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 24px 16px;
+      background: #1f3028;
+      color: #eff5f0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      z-index: 20;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; padding: 0 8px; }
+    .brand-mark {
+      width: 40px; height: 40px; flex: 0 0 40px;
+      display: grid; place-items: center;
+      border: 1px solid rgba(255,255,255,.28);
+      background: #f3c965;
+      color: #1f3028;
+      border-radius: 50%;
+      font: 700 20px/1 Georgia, serif;
+    }
+    .brand strong { display: block; font-size: 16px; }
+    .brand small { display: block; color: #b9c9c0; font-size: 12px; }
+    .nav-list { display: grid; gap: 4px; }
+    .nav-btn {
+      width: 100%; min-height: 44px; padding: 10px 12px;
+      display: flex; align-items: center; gap: 12px;
+      border: 0; border-radius: 6px; background: transparent;
+      color: #cbd7d0; text-align: left; cursor: pointer;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,.07); color: white; }
+    .nav-btn.active { background: #f3c965; color: #1f3028; font-weight: 700; }
+    .nav-btn svg { width: 19px; height: 19px; flex: 0 0 19px; }
+    .sidebar-note { margin-top: auto; padding: 16px 8px 0; border-top: 1px solid rgba(255,255,255,.14); color: #b9c9c0; font-size: 12px; }
+    .sidebar-note strong { color: #fff; display: block; margin-bottom: 4px; }
+
+    .workspace { min-width: 0; }
+    .topbar {
+      position: sticky; top: 0; z-index: 15;
+      min-height: 72px; padding: 12px clamp(20px, 4vw, 56px);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(246, 247, 243, .95);
+      backdrop-filter: blur(12px);
+    }
+    .topbar-title strong { display: block; font-size: 16px; }
+    .topbar-title span { color: var(--muted); font-size: 13px; }
+    .top-actions { display: flex; gap: 8px; align-items: center; }
+    .icon-btn, .action-btn {
+      min-height: 40px; border: 1px solid var(--line); background: var(--surface);
+      border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .icon-btn { width: 40px; padding: 0; }
+    .action-btn { padding: 0 14px; font-weight: 650; }
+    .icon-btn:hover, .action-btn:hover { border-color: #9cad9f; background: #fff; }
+    .icon-btn svg, .action-btn svg { width: 18px; height: 18px; }
+
+    main { width: min(1240px, 100%); margin: 0 auto; padding: 40px clamp(20px, 4vw, 56px) 80px; }
+    .view { display: none; animation: enter .22s ease; }
+    .view.active { display: block; }
+    @keyframes enter { from { opacity: .3; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    .section-head { margin-bottom: 28px; display: flex; align-items: end; justify-content: space-between; gap: 24px; }
+    .eyebrow { margin: 0 0 6px; color: var(--green); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 10px; font: 700 34px/1.3 Georgia, "Noto Serif SC", serif; }
+    h2 { margin-bottom: 8px; font-size: 26px; line-height: 1.35; }
+    h3 { margin-bottom: 8px; font-size: 17px; line-height: 1.45; }
+    .lede { max-width: 760px; color: var(--muted); margin-bottom: 0; }
+    .meta-label { color: var(--muted); font-size: 12px; font-weight: 700; }
+
+    .overview-band {
+      min-height: 224px; padding: 32px;
+      display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(260px, .8fr); gap: 40px; align-items: center;
+      background: #254438; color: #f5f8f5; border-radius: var(--radius); overflow: hidden; position: relative;
+    }
+    .overview-band::after {
+      content: ""; position: absolute; right: -68px; bottom: -92px; width: 250px; height: 250px;
+      border: 52px solid rgba(243, 201, 101, .18); border-radius: 50%;
+    }
+    .overview-band h1 { font-size: 38px; margin-bottom: 12px; max-width: 680px; }
+    .overview-band p { color: #d5e1da; max-width: 680px; margin-bottom: 0; }
+    .date-panel { position: relative; z-index: 1; padding-left: 32px; border-left: 1px solid rgba(255,255,255,.25); }
+    .date-panel label { display: block; color: #c8d6ce; font-size: 12px; margin-bottom: 6px; }
+    .date-panel input { width: 100%; height: 44px; padding: 0 12px; border: 1px solid rgba(255,255,255,.3); border-radius: 6px; background: rgba(255,255,255,.1); color: #fff; color-scheme: dark; }
+    .countdown { margin-top: 14px; font-size: 22px; font-weight: 800; color: #f3c965; }
+    .countdown small { display: block; color: #d5e1da; font-size: 12px; font-weight: 500; }
+
+    .quick-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .quick-card {
+      min-height: 128px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow);
+    }
+    .quick-card .icon-wrap { width: 36px; height: 36px; margin-bottom: 18px; display: grid; place-items: center; border-radius: 6px; }
+    .quick-card svg { width: 19px; }
+    .quick-card strong { display: block; font-size: 17px; }
+    .quick-card span { color: var(--muted); font-size: 13px; }
+    .green { background: var(--green-soft); color: var(--green); }
+    .blue { background: var(--blue-soft); color: var(--blue); }
+    .amber { background: var(--amber-soft); color: var(--amber); }
+    .coral { background: var(--coral-soft); color: var(--coral); }
+
+    .content-block { margin-top: 40px; }
+    .block-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    .block-title h2 { font-size: 21px; margin: 0; }
+    .block-title p { margin: 0; color: var(--muted); font-size: 13px; }
+    .priority-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .priority-item { padding: 18px 20px; display: flex; gap: 14px; border-left: 4px solid var(--green); background: var(--surface); box-shadow: 0 4px 16px rgba(27, 48, 37, .05); }
+    .priority-item b { display: block; margin-bottom: 3px; }
+    .priority-item p { color: var(--muted); font-size: 13px; margin: 0; }
+    .step-num { color: var(--green); font-weight: 850; font-variant-numeric: tabular-nums; }
+
+    .climate-chart { overflow-x: auto; padding-bottom: 8px; }
+    .climate-grid { min-width: 840px; display: grid; grid-template-columns: repeat(13, minmax(58px, 1fr)); gap: 4px; align-items: end; }
+    .climate-month { min-height: 172px; padding: 10px 6px; display: flex; flex-direction: column; justify-content: end; border-radius: 4px; color: #233027; text-align: center; }
+    .climate-month strong { font-size: 13px; }
+    .climate-month span { font-size: 11px; }
+    .climate-month small { margin-top: 8px; font-size: 10px; opacity: .75; }
+    .season-hot { background: #f2b9a6; }
+    .season-mild { background: #e7d79f; }
+    .season-cold { background: #bcd3df; }
+    .season-wet { background: #a9cfbd; }
+    .month-now { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+    .alert {
+      margin-top: 24px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px;
+      background: var(--danger-soft); border-left: 4px solid var(--danger); color: #6c2b25;
+    }
+    .alert svg { flex: 0 0 20px; margin-top: 2px; }
+    .alert strong { display: block; margin-bottom: 3px; }
+    .alert p { margin: 0; font-size: 13px; }
+
+    .segmented { display: inline-flex; padding: 3px; border: 1px solid var(--line); border-radius: 7px; background: #ebeee9; }
+    .segmented button { min-height: 34px; padding: 0 12px; border: 0; border-radius: 4px; background: transparent; cursor: pointer; font-size: 13px; }
+    .segmented button.active { background: var(--surface); box-shadow: 0 2px 8px rgba(20,35,26,.09); font-weight: 750; }
+
+    .timeline { position: relative; display: grid; gap: 12px; }
+    .timeline::before { content: ""; position: absolute; left: 21px; top: 16px; bottom: 16px; width: 2px; background: var(--line); }
+    .month-card { position: relative; margin-left: 48px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+    .month-card::before { content: ""; position: absolute; left: -37px; top: 24px; width: 12px; height: 12px; border: 4px solid var(--paper); border-radius: 50%; background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+    .month-card[open] { box-shadow: var(--shadow); }
+    .month-card summary { min-height: 88px; padding: 18px 20px; display: grid; grid-template-columns: 90px minmax(0,1fr) auto; align-items: center; gap: 20px; cursor: pointer; list-style: none; }
+    .month-card summary::-webkit-details-marker { display: none; }
+    .age-badge { color: var(--green); font-weight: 850; }
+    .age-badge small { display: block; color: var(--muted); font-size: 11px; font-weight: 600; }
+    .month-summary strong { display: block; }
+    .month-summary span { color: var(--muted); font-size: 13px; }
+    .temp-chip { padding: 5px 9px; border-radius: 4px; background: var(--blue-soft); color: var(--blue); font-size: 12px; font-weight: 800; white-space: nowrap; }
+    .month-content { padding: 0 20px 22px 130px; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 18px; border-top: 1px solid var(--line); }
+    .month-content > div { padding-top: 18px; }
+    .month-content h3 { font-size: 13px; color: var(--green); }
+    .month-content ul { margin: 0; padding-left: 18px; color: #435047; font-size: 13px; }
+    .month-content li + li { margin-top: 5px; }
+
+    .guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+    .guide-card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    .guide-card .icon-wrap { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 6px; margin-bottom: 20px; }
+    .guide-card ul { margin: 12px 0 0; padding-left: 18px; color: #48554d; font-size: 14px; }
+    .guide-card li + li { margin-top: 7px; }
+    .guide-card.wide { grid-column: span 2; }
+    .data-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); font-size: 14px; }
+    .data-table th, .data-table td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .data-table th { background: #eef1ec; color: #425046; font-size: 12px; }
+    .data-table tr:last-child td { border-bottom: 0; }
+
+    .check-layout { display: grid; grid-template-columns: 220px minmax(0,1fr); gap: 28px; align-items: start; }
+    .progress-panel { position: sticky; top: 96px; padding: 20px; background: #254438; color: #fff; border-radius: var(--radius); }
+    .progress-number { font-size: 40px; font-weight: 850; line-height: 1.1; color: #f3c965; }
+    .progress-bar { height: 8px; margin: 18px 0 8px; border-radius: 4px; background: rgba(255,255,255,.18); overflow: hidden; }
+    .progress-fill { width: 0; height: 100%; background: #f3c965; transition: width .25s ease; }
+    .progress-panel p { color: #cad8d0; font-size: 12px; margin-bottom: 16px; }
+    .check-groups { display: grid; gap: 16px; }
+    .check-group { border-top: 3px solid var(--green); background: var(--surface); }
+    .check-group h3 { padding: 18px 20px 10px; margin: 0; }
+    .check-item { padding: 12px 20px; display: flex; gap: 12px; align-items: flex-start; border-top: 1px solid var(--line); cursor: pointer; }
+    .check-item:hover { background: #f6f8f4; }
+    .check-item input { width: 19px; height: 19px; margin-top: 2px; accent-color: var(--green); flex: 0 0 auto; }
+    .check-item span { display: block; font-size: 14px; }
+    .check-item small { display: block; color: var(--muted); font-size: 12px; }
+    .check-item:has(input:checked) span { color: #7a847d; text-decoration: line-through; }
+
+    .name-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+    .name-card { position: relative; min-height: 190px; padding: 22px; border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); }
+    .name-card.favorite { border-color: #d09b2f; box-shadow: 0 0 0 2px rgba(208,155,47,.13); }
+    .name-card h3 { margin: 0 0 2px; font: 700 25px/1.35 Georgia, "Noto Serif SC", serif; }
+    .name-card .pinyin { color: var(--muted); font-size: 12px; }
+    .name-card p { margin: 16px 0 0; color: #465249; font-size: 13px; }
+    .name-meta { margin-top: 16px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { padding: 3px 7px; background: #eef1ec; color: #526057; border-radius: 3px; font-size: 11px; }
+    .heart-btn { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; }
+    .heart-btn:hover, .name-card.favorite .heart-btn { background: var(--amber-soft); border-color: #d6b56d; color: #9a6412; }
+    .heart-btn svg { width: 17px; }
+    .name-notes { margin-top: 24px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+    .name-note { padding: 16px; background: var(--blue-soft); border-top: 3px solid var(--blue); font-size: 13px; }
+    .name-note strong { display: block; margin-bottom: 3px; }
+
+    .footer-note { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .mobile-title { display: none; }
+
+    @media (max-width: 1040px) {
+      .quick-grid, .month-content { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .guide-grid, .name-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .name-notes { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 760px) {
+      .app-shell { display: block; }
+      .sidebar { position: sticky; top: 0; height: auto; padding: 10px 12px; gap: 10px; overflow: hidden; }
+      .brand { display: none; }
+      .nav-list { display: flex; overflow-x: auto; gap: 5px; scrollbar-width: none; }
+      .nav-list::-webkit-scrollbar { display: none; }
+      .nav-btn { width: auto; min-width: max-content; min-height: 38px; padding: 8px 11px; gap: 7px; }
+      .nav-btn svg { width: 16px; height: 16px; }
+      .sidebar-note { display: none; }
+      .topbar { top: 58px; min-height: 58px; padding: 8px 16px; }
+      .topbar-title { display: none; }
+      .mobile-title { display: block; font-weight: 800; }
+      .action-btn span { display: none; }
+      .action-btn { width: 40px; padding: 0; }
+      main { padding: 24px 16px 64px; }
+      .section-head { display: block; margin-bottom: 20px; }
+      .section-head .segmented { margin-top: 16px; overflow-x: auto; max-width: 100%; }
+      h1 { font-size: 28px; }
+      .overview-band { padding: 24px; grid-template-columns: 1fr; gap: 24px; }
+      .overview-band h1 { font-size: 29px; }
+      .date-panel { padding: 20px 0 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.25); }
+      .quick-grid, .priority-list, .guide-grid, .name-grid, .name-notes { grid-template-columns: 1fr; }
+      .quick-card { min-height: 108px; }
+      .guide-card.wide { grid-column: auto; }
+      .month-card { margin-left: 30px; }
+      .timeline::before { left: 10px; }
+      .month-card::before { left: -27px; }
+      .month-card summary { grid-template-columns: 68px minmax(0,1fr); gap: 12px; padding: 15px; }
+      .temp-chip { grid-column: 2; justify-self: start; }
+      .month-content { padding: 0 16px 18px; grid-template-columns: 1fr; gap: 4px; }
+      .check-layout { grid-template-columns: 1fr; }
+      .progress-panel { position: static; }
+      .data-table { display: block; overflow-x: auto; white-space: normal; }
+    }
+    @media print {
+      body { background: white; font-size: 11pt; }
+      .sidebar, .topbar, .segmented, .heart-btn, .action-btn, .icon-btn { display: none !important; }
+      .app-shell { display: block; }
+      main { width: 100%; padding: 0; }
+      .view { display: block !important; page-break-before: always; }
+      .view:first-child { page-break-before: auto; }
+      .overview-band { color: #111; background: #eef1ec; }
+      .overview-band p, .date-panel label, .countdown small { color: #333; }
+      .date-panel input { color: #111; border-color: #999; }
+      .quick-card, .guide-card, .month-card, .name-card { break-inside: avoid; box-shadow: none; }
+      .month-card:not([open]) .month-content { display: grid; }
+      .progress-panel { background: #eef1ec; color: #111; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="主导航">
+      <div class="brand">
+        <div class="brand-mark">陈</div>
+        <div><strong>小陈成长手册</strong><small>嘉兴 · 出生至一岁</small></div>
+      </div>
+      <nav class="nav-list">
+        <button class="nav-btn active" data-view="overview"><i data-lucide="layout-dashboard"></i>总览</button>
+        <button class="nav-btn" data-view="timeline"><i data-lucide="calendar-range"></i>月龄路线</button>
+        <button class="nav-btn" data-view="feeding"><i data-lucide="milk"></i>喂养</button>
+        <button class="nav-btn" data-view="sleep"><i data-lucide="moon"></i>睡眠</button>
+        <button class="nav-btn" data-view="care"><i data-lucide="bath"></i>清洁护理</button>
+        <button class="nav-btn" data-view="safety"><i data-lucide="shield-check"></i>安全健康</button>
+        <button class="nav-btn" data-view="checklist"><i data-lucide="list-checks"></i>用品清单</button>
+        <button class="nav-btn" data-view="names"><i data-lucide="heart"></i>名字备选</button>
+      </nav>
+      <div class="sidebar-note"><strong>基本原则</strong>当天气温优先于月份，宝宝信号优先于固定时间表，医疗问题优先咨询儿科。</div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="mobile-title">小陈成长手册</div>
+        <div class="topbar-title"><strong id="topTitle">家庭总览</strong><span>嘉兴气候适配 · 2026.09—2027.09</span></div>
+        <div class="top-actions">
+          <button class="icon-btn" id="expandAll" title="展开全部月份" aria-label="展开全部月份"><i data-lucide="unfold-vertical"></i></button>
+          <button class="action-btn" id="printBtn"><i data-lucide="printer"></i><span>打印手册</span></button>
+        </div>
+      </header>
+
+      <main>
+        <section class="view active" id="overview">
+          <div class="overview-band">
+            <div>
+              <p class="eyebrow" style="color:#f3c965">Jiaxing · First Year</p>
+              <h1>从嘉兴的秋天出生，走过第一个完整四季</h1>
+              <p>预产期在湿热的9月，3～5月龄经历湿冷冬季，6月龄开始辅食时进入春季，爬行期正逢梅雨，一岁前再经历盛夏。</p>
+            </div>
+            <div class="date-panel">
+              <label for="dueDate">预产期／出生日期（可修改）</label>
+              <input type="date" id="dueDate" value="2026-09-15">
+              <div class="countdown" id="countdown">准备期<small>距离预产期约 39 天</small></div>
+            </div>
+          </div>
+
+          <div class="quick-grid">
+            <article class="quick-card"><div class="icon-wrap green"><i data-lucide="map-pin"></i></div><strong>嘉兴</strong><span>湿热夏秋 · 冬季湿冷 · 梅雨明显</span></article>
+            <article class="quick-card"><div class="icon-wrap coral"><i data-lucide="thermometer-sun"></i></div><strong>24—26℃</strong><span>9月空调房常用参考，后颈干爽优先</span></article>
+            <article class="quick-card"><div class="icon-wrap blue"><i data-lucide="droplets"></i></div><strong>40%—60%</strong><span>舒适湿度参考，梅雨季重点除湿防霉</span></article>
+            <article class="quick-card"><div class="icon-wrap amber"><i data-lucide="sunrise"></i></div><strong>每日 400 IU</strong><span>足月儿维生素D常规参考，以医嘱为准</span></article>
+          </div>
+
+          <div class="content-block">
+            <div class="block-title"><h2>现在先完成</h2><p>生产前最有价值的四件事</p></div>
+            <div class="priority-list">
+              <div class="priority-item"><span class="step-num">01</span><div><b>确认医院与入院路线</b><p>核对待产包、夜间入口、停车、陪护和新生儿用品规定。</p></div></div>
+              <div class="priority-item"><span class="step-num">02</span><div><b>清洁空调与布置睡眠区</b><p>独立硬床、合身床垫、无枕头床围，空调不直吹。</p></div></div>
+              <div class="priority-item"><span class="step-num">03</span><div><b>安装后向式安全座椅</b><p>出院第一次乘车就要使用，不由成人抱着坐车。</p></div></div>
+              <div class="priority-item"><span class="step-num">04</span><div><b>明确产后家庭分工</b><p>喂养、换尿布、清洗、做饭和夜间照护落实到人。</p></div></div>
+            </div>
+          </div>
+
+          <div class="content-block">
+            <div class="block-title"><h2>第一年气候轨迹</h2><p>温度为常年生活体感范围，不是天气预报</p></div>
+            <div class="climate-chart">
+              <div class="climate-grid" id="climateGrid"></div>
+            </div>
+          </div>
+
+          <div class="alert">
+            <i data-lucide="siren"></i><div><strong>必须立即就医</strong><p>3个月以下体温达到38℃；或任何月龄出现呼吸困难、嘴唇发青、抽搐、明显嗜睡叫不醒、拒奶少尿、绿色呕吐。</p></div>
+          </div>
+        </section>
+
+        <section class="view" id="timeline">
+          <div class="section-head">
+            <div><p class="eyebrow">Month by month</p><h1>月龄路线</h1><p class="lede">每个月把嘉兴天气、穿衣、喂养、睡眠和护理放在一起看。</p></div>
+            <div class="segmented" data-filter-group="months">
+              <button class="active" data-filter="all">全部</button><button data-filter="0-3">0—3月</button><button data-filter="4-6">4—6月</button><button data-filter="7-9">7—9月</button><button data-filter="10-12">10—12月</button>
+            </div>
+          </div>
+          <div class="timeline" id="timelineList"></div>
+        </section>
+
+        <section class="view" id="feeding">
+          <div class="section-head"><div><p class="eyebrow">Responsive feeding</p><h1>喂养策略</h1><p class="lede">一岁前奶是重要基础，约6个月开始辅食；看宝宝信号，不用追求固定毫升数或强迫吃完。</p></div></div>
+          <div class="guide-grid">
+            <article class="guide-card"><div class="icon-wrap green"><i data-lucide="baby"></i></div><h3>0—6个月</h3><ul><li>母乳按需，早期通常每天8—12次。</li><li>配方奶严格按罐体比例冲调。</li><li>健康宝宝一般不额外喂水、果汁或米汤。</li><li>夜间吃奶正常，不以夜醒判断奶不够。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap amber"><i data-lucide="utensils"></i></div><h3>约6—8个月</h3><ul><li>具备准备信号后，从每天1餐逐渐到2—3餐。</li><li>先保证富铁食物：强化铁米粉、肉、鱼、熟蛋、豆制品。</li><li>从细泥逐步过渡到稠泥和软颗粒。</li><li>闭嘴、转头表示吃够，不追喂。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap blue"><i data-lucide="cup-soda"></i></div><h3>9—12个月</h3><ul><li>逐渐形成3餐，可增加1—2次点心。</li><li>练习软条、软块、手抓食物和杯子。</li><li>母乳或配方奶继续，不让奶瓶陪睡。</li><li>一岁后饮食调整结合儿保意见。</li></ul></article>
+            <article class="guide-card wide"><div class="icon-wrap coral"><i data-lucide="shield-alert"></i></div><h3>一岁前不提供</h3><ul><li>蜂蜜、未熟蛋肉海鲜、未经巴氏消毒奶制品。</li><li>整粒坚果、果冻、爆米花、硬糖、完整葡萄和大块硬食。</li><li>额外添加的盐、糖、酱油、调味粉、果汁和含糖饮料。</li><li>普通牛奶不能替代母乳或配方奶作为主要饮品。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap green"><i data-lucide="wheat"></i></div><h3>过敏食物</h3><ul><li>宝宝健康时，白天一次引入一种。</li><li>熟鸡蛋、鱼、稀释花生酱无需无故拖延。</li><li>首次少量，观察皮疹、呕吐、咳喘。</li><li>严重湿疹或既往过敏先咨询儿科。</li></ul></article>
+          </div>
+          <div class="content-block">
+            <div class="block-title"><h2>喂养信号</h2></div>
+            <table class="data-table"><thead><tr><th>状态</th><th>宝宝表现</th><th>家长动作</th></tr></thead><tbody><tr><td>早期饥饿</td><td>转头找乳头、张嘴、吃手、动作增多</td><td>开始喂奶，不等哭得厉害</td></tr><tr><td>吃饱</td><td>吸吮变慢、放松手掌、转头、推开勺子</td><td>停止喂养，不强迫清空奶瓶或餐盘</td></tr><tr><td>可能不足</td><td>湿尿布明显减少、持续精神差、体重增长异常</td><td>尽快联系儿科或喂养专业人员评估</td></tr></tbody></table>
+          </div>
+        </section>
+
+        <section class="view" id="sleep">
+          <div class="section-head"><div><p class="eyebrow">Safe sleep</p><h1>睡眠策略</h1><p class="lede">睡得安全比睡得久更重要。夜醒、短觉和阶段性倒退都可能是正常发育的一部分。</p></div></div>
+          <div class="guide-grid">
+            <article class="guide-card"><div class="icon-wrap green"><i data-lucide="bed-single"></i></div><h3>睡眠空间</h3><ul><li>独立婴儿床或床边床。</li><li>平整、偏硬、尺寸匹配的床垫。</li><li>床内只保留合身床笠。</li><li>前6个月最好同房不同床。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap blue"><i data-lucide="rotate-ccw"></i></div><h3>睡姿</h3><ul><li>每一次睡眠都从仰卧开始。</li><li>会自主双向翻身后不必反复翻回。</li><li>清醒俯卧必须有人全程看护。</li><li>出现翻身迹象立即停止襁褓。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap coral"><i data-lucide="ban"></i></div><h3>床上不要放</h3><ul><li>枕头、定型枕和斜坡垫。</li><li>厚被、床围、毛绒玩具。</li><li>防侧睡装置和松散毯子。</li><li>热水袋、电热毯和暖宝宝。</li></ul></article>
+          </div>
+          <div class="content-block">
+            <div class="block-title"><h2>常见睡眠范围</h2><p>个体差异较大，包含白天小睡</p></div>
+            <table class="data-table"><thead><tr><th>月龄</th><th>24小时总睡眠</th><th>清醒活动参考</th><th>重点</th></tr></thead><tbody><tr><td>0—3个月</td><td>约14—17小时</td><td>每次约45—90分钟</td><td>不训练新生儿独立入睡，按需回应</td></tr><tr><td>4—6个月</td><td>约12—16小时</td><td>每次约1.5—2.5小时</td><td>固定简短睡前流程，停止襁褓</td></tr><tr><td>7—9个月</td><td>约12—16小时</td><td>每次约2—3.5小时</td><td>多为2—3次小睡，分离焦虑可能增加</td></tr><tr><td>10—12个月</td><td>约12—16小时</td><td>每次约2.5—4小时</td><td>多数逐渐稳定为白天2觉，不强行并觉</td></tr></tbody></table>
+          </div>
+          <div class="content-block"><div class="block-title"><h2>固定睡前顺序</h2></div><div class="priority-list"><div class="priority-item"><span class="step-num">01</span><div><b>降低刺激</b><p>调暗灯光，停止追逐和屏幕声音。</p></div></div><div class="priority-item"><span class="step-num">02</span><div><b>清洁与换尿布</b><p>动作平稳，避免再次完全兴奋。</p></div></div><div class="priority-item"><span class="step-num">03</span><div><b>喂奶与拍嗝</b><p>能逐渐把吃奶和完全睡着拉开一点即可。</p></div></div><div class="priority-item"><span class="step-num">04</span><div><b>睡袋、关灯、安抚</b><p>每天顺序大致相同，不必精确到分钟。</p></div></div></div></div>
+        </section>
+
+        <section class="view" id="care">
+          <div class="section-head"><div><p class="eyebrow">Daily care</p><h1>清洁护理</h1><p class="lede">嘉兴湿度高，核心是褶皱保持干燥、梅雨季防霉、冬季及时保湿，而不是频繁消毒。</p></div></div>
+          <div class="guide-grid">
+            <article class="guide-card"><div class="icon-wrap blue"><i data-lucide="bath"></i></div><h3>洗澡</h3><ul><li>水温约37—38℃，每次5—10分钟。</li><li>夏季可每日清水快洗，沐浴产品每周2—3次。</li><li>冬季每周2—3次，浴室提前升温。</li><li>成人一只手始终扶住宝宝。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap coral"><i data-lucide="heart-pulse"></i></div><h3>皮肤与红臀</h3><ul><li>每日检查颈、耳后、腋窝和大腿根。</li><li>尿便后及时更换，女宝宝从前向后擦。</li><li>红臀时清水洗、晾干、涂氧化锌护臀膏。</li><li>冬季无香润肤霜每日1—2次。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap amber"><i data-lucide="sparkles"></i></div><h3>口腔与指甲</h3><ul><li>出牙前每日用湿纱布清洁牙龈。</li><li>出牙后每天刷牙2次，用米粒大小含氟牙膏。</li><li>每周修剪指甲1—2次。</li><li>最迟1岁左右完成首次牙科检查。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap green"><i data-lucide="shirt"></i></div><h3>衣物清洗</h3><ul><li>使用温和洗衣液并充分漂洗。</li><li>不必每次使用婴儿消毒剂。</li><li>梅雨天必须彻底干透再穿。</li><li>定期检查衣柜、床垫和地垫背面。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap blue"><i data-lucide="ear"></i></div><h3>耳鼻护理</h3><ul><li>耳朵只擦外耳，不深入掏耳道。</li><li>鼻塞可按医嘱使用生理盐水。</li><li>不用棉签深入鼻腔。</li><li>持续影响吃奶或呼吸时就医。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap coral"><i data-lucide="wind"></i></div><h3>空调与除湿</h3><ul><li>生产前、冬季、夏季使用前清洁滤网。</li><li>空调不直吹宝宝和婴儿床。</li><li>湿度长期超过60%时优先除湿。</li><li>加湿器仅在确实干燥时使用并每日清洗。</li></ul></article>
+          </div>
+        </section>
+
+        <section class="view" id="safety">
+          <div class="section-head"><div><p class="eyebrow">Safety & health</p><h1>安全健康</h1><p class="lede">安全措施要早于宝宝能力发展：会翻身之前防坠落，会爬之前完成全屋防护。</p></div></div>
+          <div class="alert" style="margin-top:0"><i data-lucide="siren"></i><div><strong>急诊红线</strong><p>3个月以下发热达到38℃；呼吸费力、发青、抽搐、叫不醒、明显脱水、绿色呕吐、严重过敏或已经掌握的能力明显倒退。</p></div></div>
+          <div class="content-block guide-grid">
+            <article class="guide-card"><div class="icon-wrap green"><i data-lucide="car-front"></i></div><h3>乘车</h3><ul><li>始终使用后向式婴儿安全座椅。</li><li>不穿厚棉服扣安全带。</li><li>不由成人抱着乘车。</li><li>到家后不要继续在提篮中长睡。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap coral"><i data-lucide="triangle-alert"></i></div><h3>防坠落与夹伤</h3><ul><li>换尿布时一只手始终扶住宝宝。</li><li>床、沙发、餐椅上不独处。</li><li>固定高柜和电视，安装窗户限位。</li><li>抽屉、门缝和插座提前防护。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap amber"><i data-lucide="circle-off"></i></div><h3>窒息与中毒</h3><ul><li>纽扣电池、磁力珠、药品锁起来。</li><li>辅食坐着吃，成人全程看护。</li><li>不使用成人感冒药和止咳药。</li><li>照护者学习婴儿心肺复苏和气道急救。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap blue"><i data-lucide="waves"></i></div><h3>水与烫伤</h3><ul><li>浴盆、水桶边不能独处一秒。</li><li>先放冷水，再加热水。</li><li>热饮、锅柄和电线远离桌边。</li><li>取暖器远离床品和活动区。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap green"><i data-lucide="hospital"></i></div><h3>嘉兴儿保</h3><ul><li>出院后按社区安排完成新生儿访视。</li><li>按要求完成42天及后续儿童保健。</li><li>记录身高、体重、头围和发育曲线。</li><li>接种以浙江门诊通知为准，接种后留观。</li></ul></article>
+            <article class="guide-card"><div class="icon-wrap coral"><i data-lucide="cigarette-off"></i></div><h3>家庭环境</h3><ul><li>室内、阳台和车内都不吸烟。</li><li>不以香薰、精油或蚊香改善空气。</li><li>空气质量差时缩短户外时间。</li><li>屏幕不作为哄睡或喂饭工具。</li></ul></article>
+          </div>
+        </section>
+
+        <section class="view" id="checklist">
+          <div class="section-head"><div><p class="eyebrow">Checklist</p><h1>用品与准备清单</h1><p class="lede">按阶段采购，避免一次囤满。勾选状态会保存在这台设备上。</p></div></div>
+          <div class="check-layout">
+            <aside class="progress-panel"><span class="meta-label" style="color:#cad8d0">已完成</span><div class="progress-number" id="progressNumber">0%</div><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><p id="progressText">0 / 0 项</p><button class="action-btn" id="resetChecklist" style="width:100%;background:transparent;color:white;border-color:rgba(255,255,255,.3)"><i data-lucide="rotate-ccw"></i>重置勾选</button></aside>
+            <div class="check-groups" id="checkGroups"></div>
+          </div>
+        </section>
+
+        <section class="view" id="names">
+          <div class="section-head">
+            <div><p class="eyebrow">Name shortlist</p><h1>陈姓名字备选</h1><p class="lede">低笔画、无生僻字、普通话读音清楚，兼顾童年称呼与成年正式场合。</p></div>
+            <div class="segmented" data-filter-group="names"><button class="active" data-filter="all">全部</button><button data-filter="boy">男孩</button><button data-filter="girl">女孩</button><button data-filter="neutral">中性</button><button data-filter="favorite">已收藏</button></div>
+          </div>
+          <div class="name-grid" id="nameGrid"></div>
+          <div class="name-notes">
+            <div class="name-note"><strong>普通话连读</strong>连续快速读十遍，排除容易产生的谐音。</div>
+            <div class="name-note"><strong>嘉兴方言</strong>请本地长辈分别念全名和小名，检查吴语读音。</div>
+            <div class="name-note"><strong>同名查询</strong>通过公安政务服务查询重名，并搜索同名公众人物。</div>
+            <div class="name-note"><strong>书写体验</strong>在方格纸上写十遍，确认结构清楚、孩子容易掌握。</div>
+          </div>
+        </section>
+
+        <div class="footer-note">本手册用于家庭日常照护整理，不能替代医生诊断。早产、低出生体重、严重黄疸、过敏、发育或喂养异常时，请以嘉兴当地儿科、儿童保健门诊和接种门诊意见为准。气温为嘉兴常年生活体感范围，临近日期以当日天气和预警为准。</div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script>
+    const monthData = [
+      { age:0, date:'2026年9月', temp:'23—31℃', season:'hot', summary:'湿热、可能台风；建立喂养与安全睡眠', env:['空调约24—26℃，不直吹','湿度约40%—60%','台风天备2—3天基础用品'], wear:['薄包屁衣或薄长袖一层','空调房加超薄睡袋','不戴手套，不用厚包被'], feed:['按饥饿信号喂，早期8—12次/日','通常不额外喂水','按医嘱补充维生素D'], care:['仰卧独立硬床','褶皱处每日检查清洁','观察黄疸、尿量和精神状态'] },
+      { age:1, date:'2026年10月', temp:'17—26℃', season:'mild', summary:'昼夜温差增大；帮助宝宝区分昼夜', env:['白天通风，夜间按温度加衣','空调仍可按需制冷','避免风口直吹'], wear:['薄长袖连体衣为主','外出带薄包被','后颈出汗立即减衣'], feed:['继续纯母乳或配方奶','不喂米汤、果汁和清火水','夜间喂奶仍正常'], care:['建立简短睡前顺序','每天多次短时俯卧','洗澡每周2—3次'] },
+      { age:2, date:'2026年11月', temp:'10—19℃', season:'mild', summary:'开始湿冷；制热、通风与保湿并行', env:['清洁空调滤网后制热','室内约20—24℃参考','每天分时段短时通风'], wear:['长袖连体衣加薄睡袋','不靠厚被保暖','衣物彻底干透再穿'], feed:['奶仍是唯一食物','观察生长曲线而非单顿奶量','不自行补钙铁'], care:['润肤霜每日1—2次','俯卧累计逐步增加','出现翻身迹象停止襁褓'] },
+      { age:3, date:'2026年12月', temp:'5—13℃', season:'cold', summary:'阴冷阶段；防低温，也防睡眠中过热', env:['空调制热约20—24℃','取暖器远离床品','湿度低于40%才考虑加湿'], wear:['长袖连体衣加合适睡袋','室内不长期戴帽','后颈温暖干燥为准'], feed:['继续按需母乳或配方奶','生病或拒奶及时评估','不因夜醒提前加辅食'], care:['浴室提前升温','洗后3分钟内涂润肤霜','增加抓握、追视和交流'] },
+      { age:4, date:'2027年1月', temp:'2—9℃', season:'cold', summary:'全年最冷；注意湿冷、烫伤和空气流通', env:['避免整日紧闭门窗','电热毯不用于婴儿床','检查墙角、床垫霉点'], wear:['分层穿衣便于增减','外出加防风层','睡眠不盖松散厚被'], feed:['奶仍是主要营养','不强行拉长喂奶间隔','记录异常吐奶与尿量'], care:['可逐渐固定入睡时间','提供安全地垫活动','不长时间固定在摇椅中'] },
+      { age:5, date:'2027年2月', temp:'4—12℃', season:'cold', summary:'冷暖反复；为约6个月辅食做准备', env:['根据当天温度即时调整','餐椅远离热源和桌布','准备容易清洁的进食区'], wear:['继续分层，不提前换薄装','外出防风但不捂汗','睡袋按实际室温选择'], feed:['观察辅食准备信号','购买餐椅、软勺和杯子','奶仍是主要食物'], care:['练翻身、抓脚和支撑坐','不在靠垫中强行练坐','开始全屋小物件排查'] },
+      { age:6, date:'2027年3月', temp:'8—17℃', season:'wet', summary:'潮湿多雨；开始辅食并重点防霉', env:['湿度长期偏高时除湿','米粉开封后密封防潮','地垫每日检查干燥'], wear:['薄夹层方便穿脱','室内活动避免穿太厚','雨天鞋袜和包被保持干燥'], feed:['从1餐逐步增加到2餐','优先富铁食物','逐步引入常见过敏食物'], care:['练坐、翻滚和爬行','出牙后每日刷牙2次','完成相应儿保和接种'] },
+      { age:7, date:'2027年4月', temp:'13—23℃', season:'wet', summary:'回暖多雨；扩大活动空间和食物质地', env:['天气合适时增加户外','持续检查霉菌和潮味','不用香薰掩盖空气问题'], wear:['薄长袖为主','随身带一层防风外套','活动出汗及时换衣'], feed:['每天约2—3餐辅食','从泥过渡到软颗粒','练习少量杯饮水'], care:['爬行区移除小物件','固定柜体和电视','不使用学步车'] },
+      { age:8, date:'2027年5月', temp:'18—28℃', season:'mild', summary:'逐渐闷热；防蚊、防跌落、关注食物卫生', env:['启用纱窗和蚊帐','空调使用前清洁滤网','活动区避开阳台和窗边'], wear:['薄长袖或短袖按当天选择','不使用厚重防蚊衣','出汗后及时擦干'], feed:['逐渐接近3餐','增加软块与手抓食物','成人全程看护进食'], care:['安装窗户限位和安全门','餐椅始终扣安全带','避免花露水和蚊香'] },
+      { age:9, date:'2027年6月', temp:'22—29℃', season:'wet', summary:'梅雨高湿；除湿、防霉和食品安全最重要', env:['湿度尽量不长期超过60%—65%','熟食不在室温久放','衣物完全干透'], wear:['透气短袖或薄长袖','睡眠使用超薄睡袋','痱子先降温保持干燥'], feed:['形成3餐，可有小点心','练习杯子和自主进食','继续母乳或配方奶'], care:['每日检查地垫底面','强化防夹、防撞措施','雨歇后适当户外'] },
+      { age:10, date:'2027年7月', temp:'27—35℃', season:'hot', summary:'连续高温；合理用空调，避免正午外出', env:['室内约24—27℃参考','上午早些或傍晚外出','不用厚布覆盖婴儿车'], wear:['短袖包屁衣或薄睡衣','不戴帽子睡觉','后颈出汗及时减衣'], feed:['奶、辅食和白水满足液体需要','不喝果汁和运动饮料','外出食物注意冷藏'], care:['优先遮阳和避开正午','活动后及时清洁汗液','不在车内独留宝宝'] },
+      { age:11, date:'2027年8月', temp:'27—35℃', season:'hot', summary:'湿热与台风；食品安全和家庭应急并重', env:['关注高温和台风预警','准备短期饮水、尿布和电源','断电时优先保持通风降温'], wear:['最少必要层数','外出防晒衣轻薄透气','不以手脚温度加衣'], feed:['3餐加1—2次点心','继续练习软块和杯子','不让奶瓶陪睡'], care:['扶站区固定家具','防滑、防夹、防倾倒','保持刷牙每日2次'] },
+      { age:12, date:'2027年9月', temp:'23—31℃', season:'hot', summary:'满一岁；完成体检并向家庭饮食过渡', env:['继续防暑与台风准备','保持睡眠区清空','根据活动量调节室温'], wear:['按当天温度穿薄衣','不提前囤固定尺码秋装','鞋子仅在户外需要'], feed:['保持3餐和1—2次点心','一岁后奶类调整咨询儿保','继续避免高窒息风险食物'], care:['完成一岁体检和牙科检查','评估语言、听力与动作','继续后向式安全座椅'] }
+    ];
+
+    const checkData = [
+      { title:'生产前', items:[['hospital','确认生产医院、夜间入口、停车及陪护规定'],['docs','整理身份证、医保卡、产检档案和检查报告'],['ac','清洁空调滤网，准备温湿度计'],['sleep-space','布置独立硬床，移除枕头、床围和厚被'],['car-seat','正确安装后向式婴儿安全座椅'],['support','确定产后做饭、清洁和夜间照护分工']] },
+      { title:'待产包', items:[['mom-bag','哺乳衣2—3套、一次性内裤、产褥垫和卫生巾'],['baby-bag','NB纸尿裤20—30片、薄衣2—3套、纱布包被'],['daily-bag','洗漱用品、水杯、充电器和少量现金'],['exit-clothes','准备产妇和宝宝出院衣物'],['hospital-list','与医院最新版清单逐项核对']] },
+      { title:'宝宝回家', items:[['diapers','NB纸尿裤先买1—2包，S码备1包'],['clothes','52码少量、59码4—6套，全部清洗晾干'],['bath','浴盆、浴巾、方巾、护臀膏和体温计'],['feeding-tools','奶瓶1—2个备用，不大量囤奶粉'],['vitd','向医生确认维生素D开始时间和剂量'],['community','联系社区安排新生儿访视和儿保']] },
+      { title:'冬季前', items:[['heater-check','检查空调制热和取暖设备安全'],['sleep-sack','按实际室温购买冬季睡袋'],['moisturizer','准备无香型润肤霜'],['mold-winter','检查墙角、床垫和衣柜防霉']] },
+      { title:'辅食前', items:[['high-chair','准备稳定餐椅并确认安全带'],['feeding-set','准备软勺、围兜、开放杯或吸管杯'],['iron-food','规划强化铁米粉和肉蛋鱼等富铁食物'],['first-aid','照护者学习婴儿气道异物急救']] },
+      { title:'会爬以前', items:[['anchor','固定高柜、电视和可能倾倒的家具'],['window','安装窗户限位器和楼梯安全门'],['battery','收起纽扣电池、磁力珠、药物和清洁剂'],['mosquito','梅雨和夏季前完成纱窗、蚊帐检查']] }
+    ];
+
+    const names = [
+      { name:'陈亦川', pinyin:'Chén Yìchuān', strokes:'9画', type:['boy'], meaning:'从容坚定，如川流般开阔、包容并持续向前。', tags:['低笔画','声调清楚','现代稳重'] },
+      { name:'陈修远', pinyin:'Chén Xiūyuǎn', strokes:'16画', type:['boy'], meaning:'取意“路漫漫其修远兮”，保持求索，眼光长远。', tags:['古典出处','成人感','不生僻'] },
+      { name:'陈允安', pinyin:'Chén Yǔn’ān', strokes:'10画', type:['boy','neutral'], meaning:'诚信、公允，内心安定，一生平安从容。', tags:['低笔画','温和坚定','中性可用'] },
+      { name:'陈立言', pinyin:'Chén Lìyán', strokes:'12画', type:['boy'], meaning:'立身有原则，言而有信，也有独立表达之意。', tags:['稳重','书卷气','辨识度'] },
+      { name:'陈远舟', pinyin:'Chén Yuǎnzhōu', strokes:'13画', type:['boy'], meaning:'心有方向，能够像舟一样稳健远行。', tags:['画面开阔','读音响亮','不模板'] },
+      { name:'陈以恒', pinyin:'Chén Yǐhéng', strokes:'13画', type:['boy','neutral'], meaning:'以恒心做事，重视坚持、韧性和长期积累。', tags:['寓意直接','好写','中性可用'] },
+      { name:'陈知远', pinyin:'Chén Zhīyuǎn', strokes:'15画', type:['boy','neutral'], meaning:'有见识、有远见，能够看清当下，也看向长远。', tags:['稳重','思辨','中性可用'] },
+      { name:'陈思齐', pinyin:'Chén Sīqí', strokes:'15画', type:['neutral'], meaning:'取自“见贤思齐”，始终愿意向优秀的人学习。', tags:['经典出处','成长感','男女皆宜'] },
+      { name:'陈以宁', pinyin:'Chén Yǐníng', strokes:'9画', type:['girl'], meaning:'内心安定，做事从容，能够保持自己的节奏。', tags:['极简','干净耐看','首选'] },
+      { name:'陈昭宁', pinyin:'Chén Zhāoníng', strokes:'14画', type:['girl'], meaning:'昭为明亮坦荡，宁为安定从容，明朗而不张扬。', tags:['辨识度','明亮','稳重'] },
+      { name:'陈安禾', pinyin:'Chén Ānhé', strokes:'11画', type:['girl'], meaning:'平安生长，如禾苗般踏实、有生命力，也呼应江南水乡。', tags:['低笔画','嘉兴意象','温暖'] },
+      { name:'陈念安', pinyin:'Chén Niàn’ān', strokes:'14画', type:['girl'], meaning:'心有牵挂，也愿一生平安、笃定而从容。', tags:['温暖','耐听','成年适用'] },
+      { name:'陈书宁', pinyin:'Chén Shūníng', strokes:'9画', type:['girl'], meaning:'有知识、有思考，也能保持安宁平和的心境。', tags:['低笔画','书卷气','自然'] },
+      { name:'陈宜宁', pinyin:'Chén Yíníng', strokes:'13画', type:['girl'], meaning:'举止合宜，内心安宁，温和而有分寸。', tags:['端正','不俗气','正式自然'] },
+      { name:'陈亦宁', pinyin:'Chén Yìníng', strokes:'11画', type:['girl','neutral'], meaning:'在变化中依然保持安定、清醒与坚定。', tags:['低笔画','节奏清楚','中性可用'] }
+    ];
+
+    const titles = { overview:'家庭总览', timeline:'月龄路线', feeding:'喂养策略', sleep:'睡眠策略', care:'清洁护理', safety:'安全健康', checklist:'用品清单', names:'名字备选' };
+    const icon = (name) => `<i data-lucide="${name}"></i>`;
+
+    function createClimate() {
+      const grid = document.getElementById('climateGrid');
+      grid.innerHTML = monthData.map((m, i) => `<div class="climate-month season-${m.season}" data-climate-age="${m.age}" style="height:${m.season === 'hot' ? 172 : m.season === 'cold' ? 112 : m.season === 'wet' ? 140 : 150}px"><strong>${m.date.replace('2026年','').replace('2027年','')}</strong><span>${m.temp}</span><small>${i === 0 ? '出生' : m.age + '月龄'}</small></div>`).join('');
+    }
+
+    function createTimeline() {
+      const list = document.getElementById('timelineList');
+      list.innerHTML = monthData.map((m, i) => `<details class="month-card" data-age="${m.age}" ${i === 0 ? 'open' : ''}><summary><div class="age-badge">${m.age === 0 ? '出生月' : m.age + '月龄'}<small>${m.date}</small></div><div class="month-summary"><strong>${m.summary.split('；')[0]}</strong><span>${m.summary.split('；')[1] || ''}</span></div><span class="temp-chip">${m.temp}</span></summary><div class="month-content"><div><h3>环境</h3><ul>${m.env.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>穿衣</h3><ul>${m.wear.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>喂养</h3><ul>${m.feed.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>睡眠与护理</h3><ul>${m.care.map(x=>`<li>${x}</li>`).join('')}</ul></div></div></details>`).join('');
+    }
+
+    function createChecklist() {
+      const wrap = document.getElementById('checkGroups');
+      const saved = JSON.parse(localStorage.getItem('babyGuideChecks') || '{}');
+      wrap.innerHTML = checkData.map(group => `<section class="check-group"><h3>${group.title}</h3>${group.items.map(([id, label]) => `<label class="check-item"><input type="checkbox" data-check="${id}" ${saved[id] ? 'checked' : ''}><span>${label}<small>${group.title}</small></span></label>`).join('')}</section>`).join('');
+      wrap.querySelectorAll('input').forEach(input => input.addEventListener('change', saveChecklist));
+      updateProgress();
+    }
+
+    function saveChecklist() {
+      const state = {};
+      document.querySelectorAll('[data-check]').forEach(x => state[x.dataset.check] = x.checked);
+      localStorage.setItem('babyGuideChecks', JSON.stringify(state));
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const all = [...document.querySelectorAll('[data-check]')];
+      const done = all.filter(x => x.checked).length;
+      const pct = all.length ? Math.round(done / all.length * 100) : 0;
+      document.getElementById('progressNumber').textContent = pct + '%';
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressText').textContent = `${done} / ${all.length} 项`;
+    }
+
+    function createNames(filter = 'all') {
+      const favorites = JSON.parse(localStorage.getItem('babyGuideNames') || '[]');
+      const shown = names.filter(n => filter === 'all' || (filter === 'favorite' ? favorites.includes(n.name) : n.type.includes(filter)));
+      document.getElementById('nameGrid').innerHTML = shown.length ? shown.map(n => `<article class="name-card ${favorites.includes(n.name) ? 'favorite' : ''}"><button class="heart-btn" data-name="${n.name}" title="收藏 ${n.name}" aria-label="收藏 ${n.name}">${icon('heart')}</button><h3>${n.name}</h3><span class="pinyin">${n.pinyin}</span><p>${n.meaning}</p><div class="name-meta"><span class="tag">名字 ${n.strokes}</span>${n.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`).join('') : '<p class="lede">还没有收藏名字。</p>';
+      document.querySelectorAll('.heart-btn').forEach(btn => btn.addEventListener('click', () => toggleFavorite(btn.dataset.name, filter)));
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function toggleFavorite(name, filter) {
+      let favorites = JSON.parse(localStorage.getItem('babyGuideNames') || '[]');
+      favorites = favorites.includes(name) ? favorites.filter(x => x !== name) : [...favorites, name];
+      localStorage.setItem('babyGuideNames', JSON.stringify(favorites));
+      createNames(filter);
+    }
+
+    function updateDate() {
+      const input = document.getElementById('dueDate');
+      localStorage.setItem('babyGuideDate', input.value);
+      const birth = new Date(input.value + 'T00:00:00');
+      const today = new Date(); today.setHours(0,0,0,0);
+      const days = Math.round((birth - today) / 86400000);
+      const el = document.getElementById('countdown');
+      let age = 0;
+      if (days > 0) {
+        el.innerHTML = `准备期<small>距离预产期约 ${days} 天</small>`;
+      } else {
+        const diffDays = Math.abs(days);
+        age = Math.min(12, Math.floor(diffDays / 30.44));
+        el.innerHTML = `${age} 月龄<small>出生约 ${diffDays} 天</small>`;
+      }
+      document.querySelectorAll('[data-climate-age]').forEach(x => x.classList.toggle('month-now', Number(x.dataset.climateAge) === age));
+    }
+
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-btn').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.view).classList.add('active');
+      document.getElementById('topTitle').textContent = titles[btn.dataset.view];
+      window.scrollTo({top:0, behavior:'smooth'});
+    }));
+
+    document.querySelectorAll('[data-filter-group="months"] button').forEach(btn => btn.addEventListener('click', () => {
+      btn.parentElement.querySelectorAll('button').forEach(x => x.classList.remove('active')); btn.classList.add('active');
+      document.querySelectorAll('.month-card').forEach(card => {
+        const a = Number(card.dataset.age); const f = btn.dataset.filter;
+        card.hidden = !(f === 'all' || (f === '0-3' && a <= 3) || (f === '4-6' && a >= 4 && a <= 6) || (f === '7-9' && a >= 7 && a <= 9) || (f === '10-12' && a >= 10));
+      });
+    }));
+
+    document.querySelectorAll('[data-filter-group="names"] button').forEach(btn => btn.addEventListener('click', () => {
+      btn.parentElement.querySelectorAll('button').forEach(x => x.classList.remove('active')); btn.classList.add('active'); createNames(btn.dataset.filter);
+    }));
+
+    document.getElementById('expandAll').addEventListener('click', () => {
+      document.querySelectorAll('.nav-btn').forEach(x => x.classList.toggle('active', x.dataset.view === 'timeline'));
+      document.querySelectorAll('.view').forEach(x => x.classList.toggle('active', x.id === 'timeline'));
+      document.querySelectorAll('.month-card').forEach(x => { x.hidden = false; x.open = true; });
+      document.getElementById('topTitle').textContent = titles.timeline;
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+    document.getElementById('resetChecklist').addEventListener('click', () => { localStorage.removeItem('babyGuideChecks'); createChecklist(); });
+
+    createClimate();
+    createTimeline();
+    createChecklist();
+    createNames();
+    const savedDate = localStorage.getItem('babyGuideDate');
+    if (savedDate) document.getElementById('dueDate').value = savedDate;
+    document.getElementById('dueDate').addEventListener('change', updateDate);
+    updateDate();
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>
