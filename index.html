@@ -389,7 +389,7 @@
     <div class="workspace">
       <header class="topbar">
         <div class="mobile-title">小陈成长手册</div>
-        <div class="topbar-title"><strong id="topTitle">家庭总览</strong><span>嘉兴气候适配 · 2026.09—2027.09</span></div>
+        <div class="topbar-title"><strong id="topTitle">家庭总览</strong><span id="guideRange">嘉兴气候适配 · 2026.09—2027.09</span></div>
         <div class="top-actions">
           <button class="icon-btn" id="expandAll" title="展开全部月份" aria-label="展开全部月份"><i data-lucide="unfold-vertical"></i></button>
           <button class="action-btn" id="printBtn"><i data-lucide="printer"></i><span>打印手册</span></button>
@@ -401,8 +401,8 @@
           <div class="overview-band">
             <div>
               <p class="eyebrow" style="color:#f3c965">Jiaxing · First Year</p>
-              <h1>从嘉兴的秋天出生，走过第一个完整四季</h1>
-              <p>预产期在湿热的9月，3～5月龄经历湿冷冬季，6月龄开始辅食时进入春季，爬行期正逢梅雨，一岁前再经历盛夏。</p>
+              <h1 id="overviewHeadline">从嘉兴的秋天出生，走过第一个完整四季</h1>
+              <p id="overviewSummary">预产期在湿热的9月，3～5月龄经历湿冷冬季，6月龄开始辅食时进入春季，爬行期正逢梅雨，一岁前再经历盛夏。</p>
             </div>
             <div class="date-panel">
               <label for="dueDate">预产期／出生日期（可修改）</label>
@@ -413,7 +413,7 @@
 
           <div class="quick-grid">
             <article class="quick-card"><div class="icon-wrap green"><i data-lucide="map-pin"></i></div><strong>嘉兴</strong><span>湿热夏秋 · 冬季湿冷 · 梅雨明显</span></article>
-            <article class="quick-card"><div class="icon-wrap coral"><i data-lucide="thermometer-sun"></i></div><strong>24—26℃</strong><span>9月空调房常用参考，后颈干爽优先</span></article>
+            <article class="quick-card"><div class="icon-wrap coral"><i data-lucide="thermometer-sun"></i></div><strong id="birthTemp">23—31℃</strong><span id="birthTempNote">9月常年室外体感参考，室内以后颈温暖干爽为准</span></article>
             <article class="quick-card"><div class="icon-wrap blue"><i data-lucide="droplets"></i></div><strong>40%—60%</strong><span>舒适湿度参考，梅雨季重点除湿防霉</span></article>
             <article class="quick-card"><div class="icon-wrap amber"><i data-lucide="sunrise"></i></div><strong>每日 400 IU</strong><span>足月儿维生素D常规参考，以医嘱为准</span></article>
           </div>
@@ -528,7 +528,7 @@
 
             <article class="admin-item">
               <div class="admin-when"><strong>补助申请期</strong><span data-offset-start="30" data-offset-end="75">出生后1—2.5个月</span></div>
-              <div class="admin-body"><span class="admin-tag land">建议当年办完</span><h3>育儿补贴与嘉兴生育补助</h3><p>2026年9月出生的孩子，法律允许在2026年或2027年首次申请；建议户口、医保生效后尽快办，不压到次年。</p><div class="admin-tasks">
+              <div class="admin-body"><span class="admin-tag land">建议当年办完</span><h3>育儿补贴与嘉兴生育补助</h3><p id="subsidyTiming">2026年9月出生的孩子，可在2026年或2027年首次申请；建议户口、医保生效后尽快办，不压到次年。</p><div class="admin-tasks">
                 <label class="admin-task"><input type="checkbox" data-admin-check="childcare-subsidy"><span>通过国家“育儿补贴信息管理系统”申请每年3600元育儿补贴</span></label>
                 <label class="admin-task"><input type="checkbox" data-admin-check="maternal-subsidy"><span>通过“善育在嘉”或“浙里办—生育友好”申请孕产补助</span></label>
                 <label class="admin-task"><input type="checkbox" data-admin-check="medical-subsidy"><span>医保参保凭证生效后申请20%／50%／100%个人缴费补助</span></label>
@@ -560,7 +560,7 @@
               <div class="admin-when"><strong>6个月至1岁</strong><span data-offset-start="181" data-offset-end="365">出生后第7—12个月</span></div>
               <div class="admin-body"><span class="admin-tag">年度维护</span><h3>儿保、医保续费与远期教育提醒</h3><p>这一阶段不需要急着买学区房，维持家庭材料连续、孩子健康和稳定互动更重要。</p><div class="admin-tasks">
                 <label class="admin-task"><input type="checkbox" data-admin-check="year-care"><span>完成8月龄、12月龄等当地安排的儿童保健与接种</span></label>
-                <label class="admin-task"><input type="checkbox" data-admin-check="insurance-renew"><span>关注下一年度居民医保缴费，并在2027、2028年分别续领育儿补贴和医保参保补助</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="insurance-renew"><span id="renewalYears">关注下一年度居民医保缴费，并在2027、2028年分别续领育儿补贴和医保参保补助</span></label>
                 <label class="admin-task"><input type="checkbox" data-admin-check="one-year-archive"><span>满一岁更新证件、健康、成员及土地事项年度台账</span></label>
               </div></div>
             </article>
@@ -580,9 +580,9 @@
           <div class="content-block">
             <div class="block-title"><h2>一岁以后只记三个远期节点</h2><p>不需要现在买学区房</p></div>
             <div class="priority-list">
-              <div class="priority-item"><span class="step-num">2029</span><div><b>开始观察南湖区学校与片区</b><p>关注通勤、家庭预算、学校稳定性和新校建设，不急着成交。</p></div></div>
-              <div class="priority-item"><span class="step-num">2031</span><div><b>形成住房与迁户决定</b><p>预计2033年入学，热门区域建议提前24—36个月核查房产和学额。</p></div></div>
-              <div class="priority-item"><span class="step-num">2033</span><div><b>按当年政策报名小学</b><p>施教区、证件截止日和录取批次必须以南湖区当年文件为准。</p></div></div>
+              <div class="priority-item"><span class="step-num" id="observeYear">2029</span><div><b>开始观察南湖区学校与片区</b><p>关注通勤、家庭预算、学校稳定性和新校建设，不急着成交。</p></div></div>
+              <div class="priority-item"><span class="step-num" id="houseYear">2031</span><div><b>形成住房与迁户决定</b><p id="schoolPlanText">预计2033年入学，热门区域建议提前24—36个月核查房产和学额。</p></div></div>
+              <div class="priority-item"><span class="step-num" id="schoolYear">2033</span><div><b>按当年政策报名小学</b><p>施教区、证件截止日和录取批次必须以南湖区当年文件为准。</p></div></div>
               <div class="priority-item"><span class="step-num">每年</span><div><b>复核油车港成员与土地台账</b><p>迁户前再次取得书面答复，避免为入学提前放弃尚未明确的权益。</p></div></div>
             </div>
           </div>
@@ -684,20 +684,35 @@
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <script>
     const monthData = [
-      { age:0, date:'2026年9月', temp:'23—31℃', season:'hot', summary:'湿热、可能台风；建立喂养与安全睡眠', env:['空调约24—26℃，不直吹','湿度约40%—60%','台风天备2—3天基础用品'], wear:['薄包屁衣或薄长袖一层','空调房加超薄睡袋','不戴手套，不用厚包被'], feed:['按饥饿信号喂，早期8—12次/日','通常不额外喂水','按医嘱补充维生素D'], care:['仰卧独立硬床','褶皱处每日检查清洁','观察黄疸、尿量和精神状态'] },
-      { age:1, date:'2026年10月', temp:'17—26℃', season:'mild', summary:'昼夜温差增大；帮助宝宝区分昼夜', env:['白天通风，夜间按温度加衣','空调仍可按需制冷','避免风口直吹'], wear:['薄长袖连体衣为主','外出带薄包被','后颈出汗立即减衣'], feed:['继续纯母乳或配方奶','不喂米汤、果汁和清火水','夜间喂奶仍正常'], care:['建立简短睡前顺序','每天多次短时俯卧','洗澡每周2—3次'] },
-      { age:2, date:'2026年11月', temp:'10—19℃', season:'mild', summary:'开始湿冷；制热、通风与保湿并行', env:['清洁空调滤网后制热','室内约20—24℃参考','每天分时段短时通风'], wear:['长袖连体衣加薄睡袋','不靠厚被保暖','衣物彻底干透再穿'], feed:['奶仍是唯一食物','观察生长曲线而非单顿奶量','不自行补钙铁'], care:['润肤霜每日1—2次','俯卧累计逐步增加','出现翻身迹象停止襁褓'] },
-      { age:3, date:'2026年12月', temp:'5—13℃', season:'cold', summary:'阴冷阶段；防低温，也防睡眠中过热', env:['空调制热约20—24℃','取暖器远离床品','湿度低于40%才考虑加湿'], wear:['长袖连体衣加合适睡袋','室内不长期戴帽','后颈温暖干燥为准'], feed:['继续按需母乳或配方奶','生病或拒奶及时评估','不因夜醒提前加辅食'], care:['浴室提前升温','洗后3分钟内涂润肤霜','增加抓握、追视和交流'] },
-      { age:4, date:'2027年1月', temp:'2—9℃', season:'cold', summary:'全年最冷；注意湿冷、烫伤和空气流通', env:['避免整日紧闭门窗','电热毯不用于婴儿床','检查墙角、床垫霉点'], wear:['分层穿衣便于增减','外出加防风层','睡眠不盖松散厚被'], feed:['奶仍是主要营养','不强行拉长喂奶间隔','记录异常吐奶与尿量'], care:['可逐渐固定入睡时间','提供安全地垫活动','不长时间固定在摇椅中'] },
-      { age:5, date:'2027年2月', temp:'4—12℃', season:'cold', summary:'冷暖反复；为约6个月辅食做准备', env:['根据当天温度即时调整','餐椅远离热源和桌布','准备容易清洁的进食区'], wear:['继续分层，不提前换薄装','外出防风但不捂汗','睡袋按实际室温选择'], feed:['观察辅食准备信号','购买餐椅、软勺和杯子','奶仍是主要食物'], care:['练翻身、抓脚和支撑坐','不在靠垫中强行练坐','开始全屋小物件排查'] },
-      { age:6, date:'2027年3月', temp:'8—17℃', season:'wet', summary:'潮湿多雨；开始辅食并重点防霉', env:['湿度长期偏高时除湿','米粉开封后密封防潮','地垫每日检查干燥'], wear:['薄夹层方便穿脱','室内活动避免穿太厚','雨天鞋袜和包被保持干燥'], feed:['从1餐逐步增加到2餐','优先富铁食物','逐步引入常见过敏食物'], care:['练坐、翻滚和爬行','出牙后每日刷牙2次','完成相应儿保和接种'] },
-      { age:7, date:'2027年4月', temp:'13—23℃', season:'wet', summary:'回暖多雨；扩大活动空间和食物质地', env:['天气合适时增加户外','持续检查霉菌和潮味','不用香薰掩盖空气问题'], wear:['薄长袖为主','随身带一层防风外套','活动出汗及时换衣'], feed:['每天约2—3餐辅食','从泥过渡到软颗粒','练习少量杯饮水'], care:['爬行区移除小物件','固定柜体和电视','不使用学步车'] },
-      { age:8, date:'2027年5月', temp:'18—28℃', season:'mild', summary:'逐渐闷热；防蚊、防跌落、关注食物卫生', env:['启用纱窗和蚊帐','空调使用前清洁滤网','活动区避开阳台和窗边'], wear:['薄长袖或短袖按当天选择','不使用厚重防蚊衣','出汗后及时擦干'], feed:['逐渐接近3餐','增加软块与手抓食物','成人全程看护进食'], care:['安装窗户限位和安全门','餐椅始终扣安全带','避免花露水和蚊香'] },
-      { age:9, date:'2027年6月', temp:'22—29℃', season:'wet', summary:'梅雨高湿；除湿、防霉和食品安全最重要', env:['湿度尽量不长期超过60%—65%','熟食不在室温久放','衣物完全干透'], wear:['透气短袖或薄长袖','睡眠使用超薄睡袋','痱子先降温保持干燥'], feed:['形成3餐，可有小点心','练习杯子和自主进食','继续母乳或配方奶'], care:['每日检查地垫底面','强化防夹、防撞措施','雨歇后适当户外'] },
-      { age:10, date:'2027年7月', temp:'27—35℃', season:'hot', summary:'连续高温；合理用空调，避免正午外出', env:['室内约24—27℃参考','上午早些或傍晚外出','不用厚布覆盖婴儿车'], wear:['短袖包屁衣或薄睡衣','不戴帽子睡觉','后颈出汗及时减衣'], feed:['奶、辅食和白水满足液体需要','不喝果汁和运动饮料','外出食物注意冷藏'], care:['优先遮阳和避开正午','活动后及时清洁汗液','不在车内独留宝宝'] },
-      { age:11, date:'2027年8月', temp:'27—35℃', season:'hot', summary:'湿热与台风；食品安全和家庭应急并重', env:['关注高温和台风预警','准备短期饮水、尿布和电源','断电时优先保持通风降温'], wear:['最少必要层数','外出防晒衣轻薄透气','不以手脚温度加衣'], feed:['3餐加1—2次点心','继续练习软块和杯子','不让奶瓶陪睡'], care:['扶站区固定家具','防滑、防夹、防倾倒','保持刷牙每日2次'] },
-      { age:12, date:'2027年9月', temp:'23—31℃', season:'hot', summary:'满一岁；完成体检并向家庭饮食过渡', env:['继续防暑与台风准备','保持睡眠区清空','根据活动量调节室温'], wear:['按当天温度穿薄衣','不提前囤固定尺码秋装','鞋子仅在户外需要'], feed:['保持3餐和1—2次点心','一岁后奶类调整咨询儿保','继续避免高窒息风险食物'], care:['完成一岁体检和牙科检查','评估语言、听力与动作','继续后向式安全座椅'] }
+      { age:0, focus:'建立喂养与安全睡眠', feed:['按饥饿信号喂，早期8—12次/日','通常不额外喂水','按医嘱补充维生素D'], care:['仰卧独立硬床','褶皱处每日检查清洁','观察黄疸、尿量和精神状态'] },
+      { age:1, focus:'帮助宝宝区分昼夜', feed:['继续纯母乳或配方奶','不喂米汤、果汁和清火水','夜间喂奶仍正常'], care:['建立简短睡前顺序','每天多次短时俯卧','洗澡每周2—3次'] },
+      { age:2, focus:'增加俯卧并留意翻身', feed:['奶仍是唯一食物','观察生长曲线而非单顿奶量','不自行补钙铁'], care:['俯卧累计逐步增加','出现翻身迹象停止襁褓','继续仰卧入睡并清空睡眠区'] },
+      { age:3, focus:'增加抓握、追视和交流', feed:['继续按需母乳或配方奶','生病或拒奶及时评估','不因夜醒提前加辅食'], care:['增加抓握、追视和交流','继续每天多次短时俯卧','观察头控、互动和异常偏头'] },
+      { age:4, focus:'逐渐固定入睡时间与地垫活动', feed:['奶仍是主要营养','不强行拉长喂奶间隔','记录异常吐奶与尿量'], care:['可逐渐固定入睡时间','提供安全地垫活动','不长时间固定在摇椅中'] },
+      { age:5, focus:'为辅食和居家安全做准备', feed:['观察辅食准备信号','购买餐椅、软勺和杯子','奶仍是主要食物'], care:['练翻身、抓脚和支撑坐','不在靠垫中强行练坐','开始全屋小物件排查'] },
+      { age:6, focus:'开始辅食，练坐、翻滚和爬行', feed:['从1餐逐步增加到2餐','优先富铁食物','逐步引入常见过敏食物'], care:['练坐、翻滚和爬行','出牙后每日刷牙2次','完成相应儿保和接种'] },
+      { age:7, focus:'扩大活动空间和食物质地', feed:['每天约2—3餐辅食','从泥过渡到软颗粒','练习少量杯饮水'], care:['爬行区移除小物件','固定柜体和电视','不使用学步车'] },
+      { age:8, focus:'防跌落并增加手抓食物', feed:['逐渐接近3餐','增加软块与手抓食物','成人全程看护进食'], care:['安装窗户限位和安全门','餐椅始终扣安全带','练习从坐到趴等安全转换'] },
+      { age:9, focus:'练习杯子和自主进食', feed:['形成3餐，可有小点心','练习杯子和自主进食','继续母乳或配方奶'], care:['强化防夹、防撞措施','提供安全爬行与扶站空间','保持每日2次刷牙'] },
+      { age:10, focus:'强化扶站、防夹和防撞', feed:['奶、辅食和白水满足液体需要','不喝果汁和运动饮料','外出食物注意冷藏'], care:['不在车内独留宝宝','家具尖角与抽屉做好防护','鼓励扶站、侧移，不用学步车'] },
+      { age:11, focus:'扶站安全与每日刷牙', feed:['3餐加1—2次点心','继续练习软块和杯子','不让奶瓶陪睡'], care:['扶站区固定家具','防滑、防夹、防倾倒','保持刷牙每日2次'] },
+      { age:12, focus:'完成体检并向家庭饮食过渡', feed:['保持3餐和1—2次点心','一岁后奶类调整咨询儿保','继续避免高窒息风险食物'], care:['完成一岁体检和牙科检查','评估语言、听力与动作','继续后向式安全座椅'] }
     ];
+
+    const climateByMonth = {
+      1: { temp:'2—9℃', season:'cold', summary:'全年最冷，湿冷感明显', env:['避免整日紧闭门窗，每天分时段通风','取暖器远离床品，婴儿床不用电热毯','检查墙角、床垫和衣柜是否返潮发霉'], wear:['分层穿衣，方便按室温增减','外出增加轻便防风层','睡眠使用合适睡袋，不盖松散厚被'] },
+      2: { temp:'4—12℃', season:'cold', summary:'冷暖反复，早晚仍湿冷', env:['根据当天温度调整制热和通风','室内约20—24℃可作参考','湿度低于40%再考虑清洁加湿'], wear:['继续分层，不因短暂升温过早减衣','外出防风但避免捂汗','睡袋厚度按实际室温选择'] },
+      3: { temp:'8—17℃', season:'wet', summary:'潮湿多雨，进入春季防霉期', env:['湿度长期偏高时使用除湿设备','衣物、寝具和地垫必须彻底干燥','每天检查卧室和储物处有无霉味'], wear:['薄夹层便于随时穿脱','室内活动避免穿得过厚','雨天外出后及时更换潮湿衣物'] },
+      4: { temp:'13—23℃', season:'wet', summary:'明显回暖，阴雨与温差并存', env:['天气合适时开窗并增加户外活动','持续检查霉菌、潮味和地面湿滑','不用香薰掩盖潮湿或空气问题'], wear:['薄长袖为主，随身带防风外层','中午升温时及时减衣','活动出汗后擦干或更换贴身衣物'] },
+      5: { temp:'18—28℃', season:'mild', summary:'逐渐闷热，蚊虫开始增多', env:['启用纱窗和蚊帐','入夏前清洁空调滤网','活动区避开阳台、窗边和强烈日晒'], wear:['薄长袖或短袖按当天温度选择','防蚊衣物保持轻薄透气','出汗后及时清洁并保持褶皱干燥'] },
+      6: { temp:'22—29℃', season:'wet', summary:'梅雨高湿，除湿防霉最重要', env:['室内湿度尽量不长期超过60%—65%','衣物和床品完全干透后再使用','辅食和熟食不在室温下长时间放置'], wear:['透气短袖或薄长袖','睡眠按室温选择超薄睡袋','出现痱子先降温并保持皮肤干燥'] },
+      7: { temp:'27—35℃', season:'hot', summary:'连续高温，避开正午暴晒', env:['室内约24—27℃可作空调参考','优先在早晨或傍晚外出','不要用厚布覆盖婴儿车'], wear:['短袖包屁衣或薄睡衣','不戴帽子睡觉','后颈出汗就及时减衣'] },
+      8: { temp:'27—35℃', season:'hot', summary:'湿热与台风并存，注意应急', env:['关注高温、雷雨和台风预警','准备2—3天饮水、尿布和备用电源','断电时优先保持通风和安全降温'], wear:['只穿满足舒适所需的最少层数','外出防晒衣保持轻薄透气','不根据手脚偏凉盲目加衣'] },
+      9: { temp:'23—31℃', season:'hot', summary:'仍较湿热，台风风险未完全结束', env:['空调约24—26℃可作参考，避免直吹','舒适湿度约40%—60%','持续关注高温、暴雨和台风预警'], wear:['薄包屁衣或薄长袖一层','空调房按室温使用超薄睡袋','不用厚包被，后颈干爽为准'] },
+      10: { temp:'17—26℃', season:'mild', summary:'昼夜温差增大，天气转凉', env:['白天适时通风，夜间按温度调整','仍可按需使用空调制冷或除湿','睡眠区和活动区避免风口直吹'], wear:['薄长袖连体衣为主','外出带一层轻薄包被或外套','中午升温或后颈出汗时及时减衣'] },
+      11: { temp:'10—19℃', season:'mild', summary:'开始湿冷，制热与通风并行', env:['使用制热前清洁空调滤网','室内约20—24℃可作参考','每天分时段短时通风'], wear:['长袖连体衣配合薄睡袋','不靠厚被或捂汗保暖','衣物和寝具彻底干透后再用'] },
+      12: { temp:'5—13℃', season:'cold', summary:'进入阴冷阶段，防冷也防过热', env:['空调制热约20—24℃可作参考','取暖设备远离婴儿床和可燃物','湿度低于40%再考虑清洁加湿'], wear:['长袖连体衣加合适厚度睡袋','室内不长期戴帽子','以后颈温暖且干燥作为增减参考'] }
+    };
 
     const checkData = [
       { title:'办证材料', items:[['name-list','男女名字各准备3个并完成谐音与输入检查'],['land-proof','取得妻子集体成员名册及征地项目书面口径'],['parent-docs','整理身份证、户口簿、结婚证及扫描件'],['certificate-process','向生产医院确认出生医学证明办理流程'],['community-contact','确认常住地社区儿保和接种门诊']] },
@@ -730,14 +745,31 @@
     const titles = { overview:'家庭总览', admin:'办事时间线', timeline:'月龄路线', feeding:'喂养策略', sleep:'睡眠策略', care:'清洁护理', safety:'安全健康', checklist:'用品清单', names:'名字备选' };
     const icon = (name) => `<i data-lucide="${name}"></i>`;
 
-    function createClimate() {
-      const grid = document.getElementById('climateGrid');
-      grid.innerHTML = monthData.map((m, i) => `<div class="climate-month season-${m.season}" data-climate-age="${m.age}" style="height:${m.season === 'hot' ? 172 : m.season === 'cold' ? 112 : m.season === 'wet' ? 140 : 150}px"><strong>${m.date.replace('2026年','').replace('2027年','')}</strong><span>${m.temp}</span><small>${i === 0 ? '出生' : m.age + '月龄'}</small></div>`).join('');
+    function getMonthInfo(birth, age) {
+      const date = new Date(birth.getFullYear(), birth.getMonth() + age, 1);
+      const month = date.getMonth() + 1;
+      return {
+        date,
+        label: `${date.getFullYear()}年${month}月`,
+        climate: climateByMonth[month]
+      };
     }
 
-    function createTimeline() {
+    function createClimate(birth) {
+      const grid = document.getElementById('climateGrid');
+      grid.innerHTML = monthData.map((m, i) => {
+        const { date, climate } = getMonthInfo(birth, m.age);
+        const height = climate.season === 'hot' ? 172 : climate.season === 'cold' ? 112 : climate.season === 'wet' ? 140 : 150;
+        return `<div class="climate-month season-${climate.season}" data-climate-age="${m.age}" style="height:${height}px"><strong>${date.getMonth() + 1}月</strong><span>${climate.temp}</span><small>${i === 0 ? '出生' : m.age + '月龄'}</small></div>`;
+      }).join('');
+    }
+
+    function createTimeline(birth) {
       const list = document.getElementById('timelineList');
-      list.innerHTML = monthData.map((m, i) => `<details class="month-card" data-age="${m.age}" ${i === 0 ? 'open' : ''}><summary><div class="age-badge">${m.age === 0 ? '出生月' : m.age + '月龄'}<small>${m.date}</small></div><div class="month-summary"><strong>${m.summary.split('；')[0]}</strong><span>${m.summary.split('；')[1] || ''}</span></div><span class="temp-chip">${m.temp}</span></summary><div class="month-content"><div><h3>环境</h3><ul>${m.env.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>穿衣</h3><ul>${m.wear.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>喂养</h3><ul>${m.feed.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>睡眠与护理</h3><ul>${m.care.map(x=>`<li>${x}</li>`).join('')}</ul></div></div></details>`).join('');
+      list.innerHTML = monthData.map((m, i) => {
+        const { label, climate } = getMonthInfo(birth, m.age);
+        return `<details class="month-card" data-age="${m.age}" ${i === 0 ? 'open' : ''}><summary><div class="age-badge">${m.age === 0 ? '出生月' : m.age + '月龄'}<small>${label}</small></div><div class="month-summary"><strong>${climate.summary}</strong><span>${m.focus}</span></div><span class="temp-chip">${climate.temp}</span></summary><div class="month-content"><div><h3>环境</h3><ul>${climate.env.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>穿衣</h3><ul>${climate.wear.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>喂养</h3><ul>${m.feed.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>睡眠与护理</h3><ul>${m.care.map(x=>`<li>${x}</li>`).join('')}</ul></div></div></details>`;
+      }).join('');
     }
 
     function createChecklist() {
@@ -804,6 +836,40 @@
       });
     }
 
+    function updateOverview(birth) {
+      const month = birth.getMonth() + 1;
+      const climate = climateByMonth[month];
+      const end = new Date(birth.getFullYear(), birth.getMonth() + 12, 1);
+      const seasons = ['冬天', '冬天', '春天', '春天', '春天', '夏天', '夏天', '夏天', '秋天', '秋天', '秋天', '冬天'];
+      const ageAtMonth = targetMonth => (targetMonth - month + 12) % 12;
+      const ageLabel = age => age === 0 ? '出生月' : `${age}月龄`;
+
+      document.getElementById('guideRange').textContent = `嘉兴气候适配 · ${birth.getFullYear()}.${String(month).padStart(2, '0')}—${end.getFullYear()}.${String(end.getMonth() + 1).padStart(2, '0')}`;
+      document.getElementById('overviewHeadline').textContent = `从嘉兴的${seasons[month - 1]}出生，走过第一个完整四季`;
+      document.getElementById('overviewSummary').textContent = `预产期在${month}月，出生时嘉兴常年约${climate.temp}；第一个1月约${ageLabel(ageAtMonth(1))}经历湿冷，第一个6月约${ageLabel(ageAtMonth(6))}进入梅雨期，7月约${ageLabel(ageAtMonth(7))}进入高温期。`;
+      document.getElementById('birthTemp').textContent = climate.temp;
+      document.getElementById('birthTempNote').textContent = `${month}月嘉兴常年室外温度范围；室内以后颈温暖干爽为准`;
+    }
+
+    function updateLongTermYears(birth) {
+      const birthYear = birth.getFullYear();
+      const birthMonth = birth.getMonth() + 1;
+      const schoolYear = birthYear + (birthMonth <= 8 ? 6 : 7);
+      document.getElementById('subsidyTiming').textContent = `按当前规则，${birthYear}年${birthMonth}月出生的孩子，可在${birthYear}年或${birthYear + 1}年首次申请；建议户口、医保生效后尽快办，不压到次年。`;
+      document.getElementById('renewalYears').textContent = `关注下一年度居民医保缴费，并在${birthYear + 1}、${birthYear + 2}年分别续领育儿补贴和医保参保补助`;
+      document.getElementById('observeYear').textContent = schoolYear - 4;
+      document.getElementById('houseYear').textContent = schoolYear - 2;
+      document.getElementById('schoolYear').textContent = schoolYear;
+      document.getElementById('schoolPlanText').textContent = `按现行8月31日前满6周岁的常用口径，预计${schoolYear}年入学；热门区域建议提前24—36个月核查房产和学额。最终入学年份以南湖区届时政策为准。`;
+    }
+
+    function applyMonthFilter(filter) {
+      document.querySelectorAll('.month-card').forEach(card => {
+        const age = Number(card.dataset.age);
+        card.hidden = !(filter === 'all' || (filter === '0-3' && age <= 3) || (filter === '4-6' && age >= 4 && age <= 6) || (filter === '7-9' && age >= 7 && age <= 9) || (filter === '10-12' && age >= 10));
+      });
+    }
+
     function createNames(filter = 'all') {
       const favorites = JSON.parse(localStorage.getItem('babyGuideNames') || '[]');
       const shown = names.filter(n => filter === 'all' || (filter === 'favorite' ? favorites.includes(n.name) : n.type.includes(filter)));
@@ -821,6 +887,7 @@
 
     function updateDate() {
       const input = document.getElementById('dueDate');
+      if (!input.value) return;
       localStorage.setItem('babyGuideDate', input.value);
       const birth = new Date(input.value + 'T00:00:00');
       const today = new Date(); today.setHours(0,0,0,0);
@@ -834,8 +901,14 @@
         age = Math.min(12, Math.floor(diffDays / 30.44));
         el.innerHTML = `${age} 月龄<small>出生约 ${diffDays} 天</small>`;
       }
-      document.querySelectorAll('[data-climate-age]').forEach(x => x.classList.toggle('month-now', Number(x.dataset.climateAge) === age));
+      createClimate(birth);
+      createTimeline(birth);
+      updateOverview(birth);
       updateAdminDates(birth);
+      updateLongTermYears(birth);
+      const activeMonthFilter = document.querySelector('[data-filter-group="months"] button.active')?.dataset.filter || 'all';
+      applyMonthFilter(activeMonthFilter);
+      document.querySelectorAll('[data-climate-age]').forEach(x => x.classList.toggle('month-now', Number(x.dataset.climateAge) === age));
     }
 
     document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => {
@@ -849,10 +922,7 @@
 
     document.querySelectorAll('[data-filter-group="months"] button').forEach(btn => btn.addEventListener('click', () => {
       btn.parentElement.querySelectorAll('button').forEach(x => x.classList.remove('active')); btn.classList.add('active');
-      document.querySelectorAll('.month-card').forEach(card => {
-        const a = Number(card.dataset.age); const f = btn.dataset.filter;
-        card.hidden = !(f === 'all' || (f === '0-3' && a <= 3) || (f === '4-6' && a >= 4 && a <= 6) || (f === '7-9' && a >= 7 && a <= 9) || (f === '10-12' && a >= 10));
-      });
+      applyMonthFilter(btn.dataset.filter);
     }));
 
     document.querySelectorAll('[data-filter-group="names"] button').forEach(btn => btn.addEventListener('click', () => {
@@ -874,8 +944,6 @@
       updateAdminProgress();
     });
 
-    createClimate();
-    createTimeline();
     createChecklist();
     createNames();
     initAdminChecks();
