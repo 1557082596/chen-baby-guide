@@ -245,6 +245,11 @@
     .admin-tag { display: inline-block; margin-bottom: 8px; padding: 3px 7px; border-radius: 3px; background: var(--blue-soft); color: var(--blue); font-size: 11px; font-weight: 800; }
     .admin-tag.urgent { background: var(--coral-soft); color: var(--coral); }
     .admin-tag.land { background: var(--amber-soft); color: var(--amber); }
+    .subsidy-summary { margin: 28px 0; }
+    .subsidy-table td:first-child { width: 150px; font-weight: 800; }
+    .subsidy-table td:nth-child(2) { width: 180px; color: var(--green); font-weight: 800; }
+    .money-note { margin-top: 12px; padding: 14px 16px; background: var(--green-soft); color: #315646; font-size: 13px; }
+    .money-note strong { color: var(--green); }
     .document-table td:first-child { width: 150px; font-weight: 750; color: var(--green); }
     .source-note { margin-top: 20px; color: var(--muted); font-size: 12px; }
     .source-note a { color: var(--blue); }
@@ -339,6 +344,7 @@
       .admin-tasks { grid-template-columns: 1fr; }
       .land-callout { grid-template-columns: 1fr; }
       .document-table td:first-child { width: 112px; }
+      .subsidy-table td:first-child, .subsidy-table td:nth-child(2) { width: auto; }
       .check-layout { grid-template-columns: 1fr; }
       .progress-panel { position: static; }
       .data-table { display: block; overflow-x: auto; white-space: normal; }
@@ -437,7 +443,7 @@
         <section class="view" id="admin">
           <div class="section-head">
             <div><p class="eyebrow">Birth paperwork</p><h1>从取名到满一岁的办事时间线</h1><p class="lede">日期会跟随总览中的预产期变化。宝宝出生后，把日期改成实际出生日期，后续节点会自动重算。</p></div>
-            <div class="admin-status"><strong id="adminProgress">0/31</strong><span>已完成</span><button class="icon-btn" id="resetAdmin" title="重置办事进度" aria-label="重置办事进度"><i data-lucide="rotate-ccw"></i></button></div>
+            <div class="admin-status"><strong id="adminProgress">0/36</strong><span>已完成</span><button class="icon-btn" id="resetAdmin" title="重置办事进度" aria-label="重置办事进度"><i data-lucide="rotate-ccw"></i></button></div>
           </div>
 
           <div class="process-flow" aria-label="新生儿办事先后顺序">
@@ -451,6 +457,21 @@
           <div class="land-callout">
             <div class="icon-wrap"><i data-lucide="land-plot"></i></div>
             <div><strong>你们家的特殊重点：上户口不等于取得土地权益</strong><p>如果孩子随母落在油车港，办完户口后还要向妻子所在的农村集体经济组织单独申请成员确认和名册变更。房屋已经拆除，孩子通常不能倒推增加已经锁定的房屋或宅基地补偿；当前要追踪的是尚未结清的土地补偿、社保安置、成员及集体收益权益。</p></div>
+          </div>
+
+          <div class="subsidy-summary">
+            <div class="block-title"><h2>2026年嘉兴家庭可申请的补助</h2><p>以嘉卫〔2026〕2号现行方案为准</p></div>
+            <table class="data-table subsidy-table">
+              <thead><tr><th>项目</th><th>金额或减免</th><th>你们家的主要条件</th><th>何时申请</th></tr></thead>
+              <tbody>
+                <tr><td>国家育儿补贴</td><td>每孩每年3600元</td><td>符合法律法规规定生育或收养、未满3周岁、孩子具有嘉兴户籍；一孩二孩三孩都可申请。</td><td>出生当年或次年首次申请，之后连续两个年度分别续领。</td></tr>
+                <tr><td>嘉兴孕产补助</td><td>一孩1000元<br>二孩2000元<br>三孩3000元</td><td>2025年1月1日以后依法生育，母亲为嘉兴户籍。妻子户籍在油车港，原则上符合“嘉兴户籍”这一基础条件。</td><td>孩子出生当年或次年申请一次。</td></tr>
+                <tr><td>居民医保参保补助</td><td>一孩补20%<br>二孩补50%<br>三孩补100%</td><td>孩子为嘉兴户籍并参加嘉兴市城乡居民医保，未重复享受其他医保缴费补助，补助至满3周岁。</td><td>出生当年或次年首次申请，之后连续两个年度续领。</td></tr>
+                <tr><td>嘉兴三孩补助</td><td>一次性9200元</td><td>仅限三孩；2025年1月1日以后依法出生，且出生户口首次申报在嘉兴市。</td><td>孩子出生当年或次年申请一次。</td></tr>
+                <tr><td>个税专项附加扣除</td><td>每孩每月2000元扣除额度</td><td>不是现金补贴；有个人所得税综合所得的父母，可由一方100%扣除或双方各50%扣除。</td><td>取得孩子身份信息后，在“个人所得税”APP填报，夫妻先统一分配方式。</td></tr>
+              </tbody>
+            </table>
+            <div class="money-note"><strong>落户选择不会造成南湖与油车港之间的市级补贴差额：</strong>两地都属于嘉兴市。孩子落油车港，由孩子户籍所在地的油车港镇和秀洲区审核；孩子落南湖，由南湖区相应街道和区级部门审核。国家育儿补贴可通过育儿补贴信息管理系统或户籍所在地镇街申请；其他三项可从“我的嘉兴／嘉兴社保卡”进入“善育在嘉”，或从“浙里办”进入“生育友好”。审核原则上在30个工作日内完成，审核通过后原则上在每季度第二个月月底前集中发放，即通常关注2月、5月、8月、11月批次。</div>
           </div>
 
           <div class="admin-timeline">
@@ -506,6 +527,17 @@
             </article>
 
             <article class="admin-item">
+              <div class="admin-when"><strong>补助申请期</strong><span data-offset-start="30" data-offset-end="75">出生后1—2.5个月</span></div>
+              <div class="admin-body"><span class="admin-tag land">建议当年办完</span><h3>育儿补贴与嘉兴生育补助</h3><p>2026年9月出生的孩子，法律允许在2026年或2027年首次申请；建议户口、医保生效后尽快办，不压到次年。</p><div class="admin-tasks">
+                <label class="admin-task"><input type="checkbox" data-admin-check="childcare-subsidy"><span>通过国家“育儿补贴信息管理系统”申请每年3600元育儿补贴</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="maternal-subsidy"><span>通过“善育在嘉”或“浙里办—生育友好”申请孕产补助</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="medical-subsidy"><span>医保参保凭证生效后申请20%／50%／100%个人缴费补助</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="third-child-subsidy"><span>如果是三孩，另外申请一次性9200元三孩补助</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="tax-deduction"><span>有个税综合所得的父母，在“个人所得税”APP填报3岁以下婴幼儿照护扣除</span></label>
+              </div></div>
+            </article>
+
+            <article class="admin-item">
               <div class="admin-when"><strong>满月至42天</strong><span data-offset-start="28" data-offset-end="42">出生后4—6周</span></div>
               <div class="admin-body"><span class="admin-tag">核验是否真正办结</span><h3>母婴复查与材料回头看</h3><p>不只看“提交成功”，要确认名册、医保和证卡已实际生效。</p><div class="admin-tasks">
                 <label class="admin-task"><input type="checkbox" data-admin-check="month-check"><span>完成满月或42天儿童保健，记录身高、体重、头围和发育情况</span></label>
@@ -528,7 +560,7 @@
               <div class="admin-when"><strong>6个月至1岁</strong><span data-offset-start="181" data-offset-end="365">出生后第7—12个月</span></div>
               <div class="admin-body"><span class="admin-tag">年度维护</span><h3>儿保、医保续费与远期教育提醒</h3><p>这一阶段不需要急着买学区房，维持家庭材料连续、孩子健康和稳定互动更重要。</p><div class="admin-tasks">
                 <label class="admin-task"><input type="checkbox" data-admin-check="year-care"><span>完成8月龄、12月龄等当地安排的儿童保健与接种</span></label>
-                <label class="admin-task"><input type="checkbox" data-admin-check="insurance-renew"><span>关注下一年度居民医保集中参保缴费通知，避免断保</span></label>
+                <label class="admin-task"><input type="checkbox" data-admin-check="insurance-renew"><span>关注下一年度居民医保缴费，并在2027、2028年分别续领育儿补贴和医保参保补助</span></label>
                 <label class="admin-task"><input type="checkbox" data-admin-check="one-year-archive"><span>满一岁更新证件、健康、成员及土地事项年度台账</span></label>
               </div></div>
             </article>
@@ -539,6 +571,7 @@
             <table class="data-table document-table"><tbody>
               <tr><td>父母证件</td><td>双方身份证、户口簿、结婚证、医保凭证；证件正反面及关键页扫描件。</td></tr>
               <tr><td>宝宝证件</td><td>出生医学证明、户口页、医保参保记录、社会保障卡、接种证、筛查结果。</td></tr>
+              <tr><td>补贴材料</td><td>夫妻身份证、户口簿、结婚证，宝宝出生医学证明和户口页，收款银行卡或社会保障卡；医保补助另备已生效的参保缴费凭证及未重复享受补助的承诺。</td></tr>
               <tr><td>土地材料</td><td>妻子成员名册证明、征地项目编号、补偿方案、人员截止日、新生儿书面答复、成员申请回执。</td></tr>
               <tr><td>健康材料</td><td>出院记录、母子保健手册、喂养及黄疸记录、儿保记录、疫苗接种记录。</td></tr>
             </tbody></table>
@@ -554,7 +587,7 @@
             </div>
           </div>
 
-          <p class="source-note">政策依据提示：出生登记原则上应在出生后一个月内申报；集体成员与土地权益依据项目文件、成员名册及集体决议分别判断。参考 <a href="https://www.gov.cn/yaowen/liebiao/202406/content_6960131.htm" target="_blank" rel="noreferrer">《农村集体经济组织法》</a>、<a href="https://www.xiuzhou.gov.cn/art/2023/12/1/art_1229431049_2499557.html" target="_blank" rel="noreferrer">秀洲区征地区片综合地价标准</a>。具体材料和办理入口以生产医院、“浙里办”、户籍窗口、医保及社区当年通知为准。</p>
+          <p class="source-note">政策依据提示：补助金额、条件和期限依据2026年现行的 <a href="https://wsjkw.jiaxing.gov.cn/col/col1229456608/art/2026/art_f82a0d544ed549e6a60f023e0694e713.html" target="_blank" rel="noreferrer">《嘉兴市生育补助实施方案》（嘉卫〔2026〕2号）</a>；旧的二孩5000元、三孩20000元一次性育儿津贴办法已被该方案废止。个税扣除参考 <a href="https://gtm-cn-2r42llmgk0b.liaoning.chinatax.gov.cn/art/2024/3/25/art_99_124819.html" target="_blank" rel="noreferrer">国家税务总局公开问答</a>。土地权益另参考 <a href="https://www.gov.cn/yaowen/liebiao/202406/content_6960131.htm" target="_blank" rel="noreferrer">《农村集体经济组织法》</a>、<a href="https://www.xiuzhou.gov.cn/art/2023/12/1/art_1229431049_2499557.html" target="_blank" rel="noreferrer">秀洲区征地区片综合地价标准</a>。实际入口和材料以申请时系统提示为准。</p>
         </section>
 
         <section class="view" id="timeline">
